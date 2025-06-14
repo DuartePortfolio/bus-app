@@ -138,7 +138,7 @@ async function loadWeather() {
             tbody.appendChild(tr);
         });
     } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar meteorologia.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8">Erro ao carregar meteorologia.</td></tr>';
     }
 }
 
@@ -162,7 +162,7 @@ async function loadUsers() {
             tbody.appendChild(tr);
         });
     } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar veículos.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar veículos.</td></tr>';
     }
 }
 
