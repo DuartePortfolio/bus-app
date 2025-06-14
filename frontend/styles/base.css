@@ -1,0 +1,30 @@
+/* header */
+
+
+
+
+/* body */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f2eeee;
+}
+
+/* sizes and fonts */
+
+
+/* buttons */
+.create-btn {
+  background: #0080bd;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: background 0.2s;
+}
+.create-btn:hover {
+  background: #005f8a;
+}

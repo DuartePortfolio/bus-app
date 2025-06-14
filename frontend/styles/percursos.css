@@ -1,0 +1,137 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 0 24px;
+}
+
+.logo {
+  background: #ccc;
+  width: 250px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.3rem;
+}
+
+.header-actions .icon {
+  font-size: 1.5rem;
+}
+
+.header-actions .divider {
+  border-left: 2px solid #222;
+  height: 28px;
+  margin: 0 12px;
+}
+
+nav {
+  background: #0080bd;
+  margin-top: 24px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 24px;
+}
+
+nav li {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 18px 32px 18px 0;
+  cursor: pointer;
+}
+
+nav li.active {
+  text-decoration: underline;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1.7rem;
+  margin-bottom: 8px;
+}
+
+button[type="submit"] {
+  background: #0080bd;
+  color: #fff;
+  font-size: 1.3rem;
+  padding: 8px 30px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+button .arrow {
+  font-size: 1.5rem
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+label {
+  margin-bottom: 0px;
+  font-size:  1.3rem;
+  color: #000000;
+}
+
+.optgroup {
+  display: flex;
+  flex-direction: column;
+  margin: 20px
+}
+
+select {
+  height: 35px;
+  width: 300px;
+  text-align: center;
+  background-color: #90E0EF;
+  border: 2px solid #222;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+option {
+  background-color: #fff;
+}
+
+.selections {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-row {
+  margin-top: 30px;
+}
