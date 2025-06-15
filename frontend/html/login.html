@@ -11,17 +11,15 @@
 
     <link rel="stylesheet" href="../styles/base.css">
 
-    <link rel="stylesheet" href="../../styles/login.css">
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
     <header>
         <div class="logo">Logotipo</div>
         <div class="header-actions">
-            <span>Login</span>
-            <span class="icon">&#128100;</span>
-            <span class="divider"></span>
-            <span>Sign In</span>
-            <span class="icon">&#128257;</span>
+            <a href="../html/login.html">Login</a>
+            <span class="divider">I</span>
+            <a href="../html/register.html">Sign In</a>
         </div>
     </header>
     <nav class="navbar navbar-expand-lg bg-primary">
@@ -30,15 +28,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="..\horarios.html" >Horários</a>
-                <a class="nav-link" href="..\html\percursos.html">Percursos</a>
+                <a class="nav-link" href="../horarios.html">Horários</a>
+                <a class="nav-link" href="../html/percursos.html">Percursos</a>
             </div>
             </div>
         </div>
     </nav>
     <main>
         <form class="login-form">
-            <h1>Iniciar Sessão</h1>
+            <div class="title">
+                <h2>Iniciar Sessão</h2>
+            </div>
+
             <label for="username">Username</label>
             <input type="text" id="username" required>
 

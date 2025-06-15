@@ -1,16 +1,69 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* colors */
+:root {
+  --primary: #0077B6;
+  --secondary: #90E0EF;
+  --accent: #FFD60A;
+  --background: #FBFBFB;
+  --text: #333333;
+  --text-sec: #666666;
+}
+
 /* header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px;
+  font-size: 1.5rem;
+}
 
+.logo {
+  background: #ccc;
+  width: 220px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.header-actions a, .header-actions span{
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.header-actions a:hover {
+  color: var(--accent);
+  transition: color 0.2s;
+}
+
+.navbar {
+  background: var(--primary) !important;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.nav-link {
+  color: var(--background);
+  margin: 0px 35px 0px 15px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
 
 
 /* body */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
-  background: #f2eeee;
+  background: var(--background);
 }
-
-/* sizes and fonts */
 
 
 /* buttons */
@@ -25,6 +78,7 @@ body {
   margin-left: 12px;
   transition: background 0.2s;
 }
+
 .create-btn:hover {
   background: #005f8a;
 }
