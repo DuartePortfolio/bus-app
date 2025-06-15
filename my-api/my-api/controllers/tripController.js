@@ -7,7 +7,14 @@ const User = db.User
 // GET /api/trips
 exports.getAllTrips = async (req, res) => {
   try {
+    // -- If a driver_id is provided, filter trips by that driver
+    const where = {}
+    if (req.query.driver_id) {
+      where.driver_id = req.query.driver_id
+    }
+
     const trips = await Trip.findAll({
+      where,
       include: [
         { model: Route, as: 'route' },
         { model: Vehicle, as: 'vehicle' },
