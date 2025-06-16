@@ -31,6 +31,10 @@ exports.getAllTrips = async (req, res) => {
 // GET /api/trips/:id
 exports.getTripById = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const trip = await Trip.findByPk(req.params.id, {
       include: [
         { model: Route, as: 'route' },
@@ -137,6 +141,10 @@ exports.addAlternativeTrajectoryToTrip = async (req, res) => {
 // PATCH /api/trips/:id
 exports.updateTrip = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const { route_id, vehicle_id, driver_id, start_time } = req.body
     const trip = await Trip.findByPk(req.params.id)
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })
@@ -150,6 +158,10 @@ exports.updateTrip = async (req, res) => {
 // DELETE /api/trips/:id
 exports.deleteTrip = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const trip = await Trip.findByPk(req.params.id)
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })
     await trip.destroy()
@@ -163,6 +175,9 @@ exports.deleteTrip = async (req, res) => {
 exports.removeAlternativeTrajectoryFromTrip = async (req, res) => {
   try {
     const { id, trajectory_id } = req.params
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const trip = await Trip.findByPk(id)
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })
 

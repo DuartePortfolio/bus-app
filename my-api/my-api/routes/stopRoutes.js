@@ -8,7 +8,7 @@ const role = require('../middleware/role');
 router.get('/stops', ctrl.getAllStops);
 router.get('/stops/:id', ctrl.getStopById);
 router.post('/stops', auth, role('operator'), ctrl.createStop);
-router.patch('/stops/:id', role('operator'), auth, ctrl.updateStop);
-router.delete('/stops/:id', role('operator'), auth, ctrl.deleteStop);
+router.patch('/stops/:id', auth, role('operator'), ctrl.updateStop);
+router.delete('/stops/:id', auth, role('operator'), ctrl.deleteStop);
 
 module.exports = router;
