@@ -62,7 +62,7 @@ exports.createUser = async (req, res) => {
     }
     // Validation to guarantee contact is a number
     if (isNaN(Number(contact)) || !/^\d+$/.test(String(contact))) {
-      return res.status(400).json({ error: 'Contact must be a number.' })
+      return res.status(400).json({ error: 'Contact must be a positive number.' })
     }
 
     const existingUser = await User.findOne({ where: { email } })
