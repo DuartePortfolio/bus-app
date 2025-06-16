@@ -1,4 +1,6 @@
 const db = require('../models')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const User = db.User
 
 // GET /api/users
@@ -68,8 +70,10 @@ exports.createUser = async (req, res) => {
       return res.status(409).json({ error: 'Email already in use.' })
     }
 
-    // encriptar password, falar com prof
-    const newUser = await User.create({ name, email, password, role, contact })
+    // Encrypt password 
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const newUser = await User.create({ name, email, password: hashedPassword, role, contact })
     res.status(201).json(newUser)
   } catch (err) {
     res.status(500).json({
@@ -117,5 +121,31 @@ exports.deleteUser = async (req, res) => {
     res.json({ message: 'User deleted successfully.' })
   } catch (err) {
     res.status(500).json({ error: 'Error deleting user.' })
+  }
+}
+
+exports.loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' })
+    }
+    const user = await User.findOne({ where: { email } })
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials.' })
+    }
+    const valid = await bcrypt.compare(password, user.password)
+    if (!valid) {
+      return res.status(401).json({ error: 'Invalid credentials.' })
+    }
+    // Generate JWT
+    const token = jwt.sign(
+      { user_id: user.user_id, role: user.role },
+      process.env.JWT_SECRET || 'your_jwt_secret',
+      { expiresIn: '1h' }
+    )
+    res.json({ token })
+  } catch (err) {
+    res.status(500).json({ error: 'Error logging in.' })
   }
 }
