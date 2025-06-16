@@ -1,8 +1,6 @@
-@import url('base.css');
-
 main {
-  margin: 40px auto 0 auto;
-  max-width: 900px;
+  margin: 40px auto 40px auto;
+  max-width: 1100px;
 }
 
 .welcome {
@@ -11,43 +9,51 @@ main {
 }
 
 .dashboard-box {
-  border: 1.5px solid #ddd;
-  border-radius: 16px;
+  border-radius: 15px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
   padding: 24px;
-  background: #fff;
+  background: var(--background);
 }
 
-.main-table, .alt-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  margin-top: 12px;
-  background: #fff;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1.5px solid #ddd;
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
 }
 
-.main-table th, .main-table td,
-.alt-table th, .alt-table td {
-  padding: 10px 14px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
+.main-section {
+  flex: 2;
 }
 
-.main-table th:last-child, .main-table td:last-child,
-.alt-table th:last-child, .alt-table td:last-child {
-  border-right: none;
+
+.create-btn {
+  background: #0080bd;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 12px;
+  margin-top: 8px;
+  align-self: flex-end;
+  transition: background 0.2s;
 }
 
-.main-table th, .alt-table th {
-  background: #f7f7f7;
-  font-weight: bold;
+.create-btn:hover {
+  background: #005f8a;
 }
 
-.main-table tr:last-child td,
-.alt-table tr:last-child td {
-  border-bottom: none;
+.section-row {
+  margin-top: 32px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 h2, h3 {
@@ -55,8 +61,71 @@ h2, h3 {
   font-weight: bold;
 }
 
-.alt-table th, .alt-table td {
+.main-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1.5px solid #ddd;
+  margin-bottom: 8px;
+}
+
+.main-table th, .main-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
   font-size: 1rem;
+}
+
+.main-table th:last-child, .main-table td:last-child {
+  border-right: none;
+  text-align: center;
+}
+
+.main-table th {
+  background: #f7f7f7;
+  font-weight: bold;
+}
+
+.main-table tr:last-child td {
+  border-bottom: none;
+}
+
+.icon-btn {
+  background: #0080bd;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.icon-btn:hover {
+  background: #005f8a;
+}
+
+.view-btn {
+  background: #0080bd;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+
+.view-btn:hover {
+  background: #005f8a;
 }
 
 .text {
