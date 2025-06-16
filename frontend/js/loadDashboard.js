@@ -22,7 +22,54 @@ async function loadTrips() {
                 <td>${trip.vehicle?.plate_number || trip.vehicle_id}</td>
                 <td>${trip.driver?.name || trip.driver_id}</td>
                 <td>${altTraj}</td>
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>
+                    <button type="button" class="btn btn-primary icon-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        &#9998;
+                    </button>
+                                    
+                    <!-- Atualizar Viagem Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar Viagem</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="viagem-form">
+                                        <div class="form-group">
+                                            <label>Data</label>
+                                            <input type="text" placeholder="Data">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Horas</label>
+                                            <input type="text" placeholder="Horas">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Rota</label>
+                                            <input type="text" placeholder="Rota">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Veículo</label>
+                                            <input type="text" placeholder="Veículo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Condutor</label>
+                                            <input type="text" placeholder="Condutor">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Trajetos Alternativos</label>
+                                            <input type="text" placeholder="Trajetos">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             `;
             tbody.appendChild(tr);
         });
