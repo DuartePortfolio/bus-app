@@ -52,39 +52,36 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5">Adicionar Viagem</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="add-trip-btn"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form class="viagem-form">
                                             <div class="form-group">
-                                                <label>Data</label>
-                                                <input type="text" placeholder="Data">
+                                                <label for="viagem-data">Data e Hora</label>
+                                                <input type="text" id="viagem-data" placeholder="2025-04-03 19:00:00" name="start_time">
                                             </div>
                                             <div class="form-group">
-                                                <label>Horas</label>
-                                                <input type="text" placeholder="Horas">
+                                                <label for="viagem-rota">Rota</label>
+                                                <input type="text" id="viagem-rota" placeholder="ID Rota" name="route_id">
                                             </div>
                                             <div class="form-group">
-                                                <label>Rota</label>
-                                                <input type="text" placeholder="Rota">
+                                                <label for="viagem-veiculo">Veículo</label>
+                                                <input type="text" id="viagem-veiculo" placeholder="ID Veículo" name="vehicle_id">
                                             </div>
                                             <div class="form-group">
-                                                <label>Veículo</label>
-                                                <input type="text" placeholder="Veículo">
+                                                <label for="viagem-condutor">Condutor</label>
+                                                <input type="text" id="viagem-condutor" placeholder="ID Condutor" name="driver_id">
                                             </div>
                                             <div class="form-group">
-                                                <label>Condutor</label>
-                                                <input type="text" placeholder="Condutor">
+                                                <label for="viagem-trajetos">Trajetos Alternativos</label>
+                                                <input type="text" id="viagem-trajetos" placeholder="ID Trajeto (não obrigatório)" name="alternative_routes">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Trajetos Alternativos</label>
-                                                <input type="text" placeholder="Trajetos">
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -103,13 +100,6 @@
                         </thead>
                         <tbody id="trips-tbody">
                             <tr>
-                                <td>34</td>
-                                <td>09:00</td>
-                                <td>Courelas - Centro</td>
-                                <td>PT-1234</td>
-                                <td>4</td>
-                                <td>4, 6</td>
-                                <td>
                                     <button type="button" class="btn btn-primary icon-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         &#9998;
                                     </button>
@@ -181,22 +171,15 @@
                                     <div class="modal-body">
                                         <form class="rota-form">
                                             <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" placeholder="ID">
-                                            </div>
-                                            <div class="form-group">
                                                 <label>Nome</label>
-                                                <input type="text" placeholder="Nome">
+                                                <input type="text" placeholder="Nome"  name="route_name">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Paragens</label>
-                                                <input type="text" placeholder="Paragens">
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -249,28 +232,25 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="rota-form">
+                                        <form class="paragem-form">
                                             <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" placeholder="ID">
+                                                <label>Nome</label>
+                                                <input type="text" placeholder="Nome da Paragem" name="stop_name">
                                             </div>
                                             <div class="form-group">
                                                 <label>Latitude</label>
-                                                <input type="text" placeholder="Latitude">
+                                                <input type="text" placeholder="32.68700000" name="latitude">
                                             </div>
                                             <div class="form-group">
                                                 <label>Longitude</label>
-                                                <input type="text" placeholder="Longitude">
+                                                <input type="text" placeholder="-16.94500000" name="longitude">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Nome</label>
-                                                <input type="text" placeholder="Nome">
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -327,24 +307,21 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="rota-form">
-                                            <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" placeholder="ID">
-                                            </div>
+                                        <form class="veiculo-form">
                                             <div class="form-group">
                                                 <label>Matrícula</label>
-                                                <input type="text" placeholder="Matrícula">
+                                                <input type="text" placeholder="Matrícula" name="plate_number">
                                             </div>
                                             <div class="form-group">
                                                 <label>Capacidade</label>
-                                                <input type="text" placeholder="Capacidade">
+                                                <input type="text" placeholder="Capacidade" name="capacity">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -397,28 +374,25 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="rota-form">
-                                            <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" placeholder="ID">
-                                            </div>
+                                        <form class="trajetoria-alternativa-form">
                                             <div class="form-group">
                                                 <label>Stop ID 1</label>
-                                                <input type="text" placeholder="Stop ID 1">
+                                                <input type="text" placeholder="Stop ID 1" name="stop_id_1">
                                             </div>
                                             <div class="form-group">
                                                 <label>Stop ID 2</label>
-                                                <input type="text" placeholder="Stop ID 2">
+                                                <input type="text" placeholder="Stop ID 2" name="stop_id_2">
                                             </div>
                                             <div class="form-group">
                                                 <label>Trajetória</label>
-                                                <input type="text" placeholder="Trajetória">
+                                                <input type="text" placeholder="Descrição da trajetória" name="alt_trajectory">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -475,40 +449,37 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="rota-form">
+                                        <form class="meteorologia-form">
                                             <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" placeholder="ID">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Data</label>
-                                                <input type="text" placeholder="Data">
+                                                <label>Data e Hora</label>
+                                                <input type="text" placeholder="Data" name="datetime">
                                             </div>
                                             <div class="form-group">
                                                 <label>Temperatura</label>
-                                                <input type="text" placeholder="Temperatura">
+                                                <input type="text" placeholder="Temperatura" name="temperature">
                                             </div>
                                             <div class="form-group">
                                                 <label>Chuva</label>
-                                                <input type="text" placeholder="Chuva">
+                                                <input type="text" placeholder="Chuva" name="rain">
                                             </div>
                                             <div class="form-group">
                                                 <label>Vento</label>
-                                                <input type="text" placeholder="Vento">
+                                                <input type="text" placeholder="Vento" name="wind">
                                             </div>
                                             <div class="form-group">
                                                 <label>Localização</label>
-                                                <input type="text" placeholder="Localização">
+                                                <input type="text" placeholder="Localização" name="location">
                                             </div>
                                             <div class="form-group">
                                                 <label>Notas</label>
-                                                <input type="text" placeholder="Notas">
+                                                <input type="text" placeholder="Notas" name="notes">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -558,32 +529,33 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="rota-form">
-                                            <div class="form-group">
-                                                <label>ID</label>
-                                                <input type="text" placeholder="ID">
-                                            </div>
+                                        <form class="utilizador-form">
                                             <div class="form-group">
                                                 <label>Nome</label>
-                                                <input type="text" placeholder="Nome">
+                                                <input type="text" placeholder="Primeiro e Último Nome" name="name">
                                             </div>
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="text" placeholder="Email">
+                                                <input type="text" placeholder="Email" name="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="text" placeholder="Password" name="password">
                                             </div>
                                             <div class="form-group">
                                                 <label>Cargo</label>
-                                                <input type="text" placeholder="Cargo">
+                                                <input type="text" placeholder="'operator ou 'driver'" name="role">
                                             </div>
                                             <div class="form-group">
                                                 <label>Contacto</label>
-                                                <input type="text" placeholder="Contacto">
+                                                <input type="text" placeholder="Contacto telefónico" name="contact">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

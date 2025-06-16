@@ -90,6 +90,9 @@ exports.updateUser = async (req, res) => {
     if (!req.body) {
       return res.status(400).json({ error: 'Request body is required.' })
     }
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'User ID is required and must be a valid number.' })
+    }
     const { name, email, password, role, contact } = req.body
 
     const user = await User.findByPk(id)
@@ -114,6 +117,10 @@ exports.updateUser = async (req, res) => {
 // DELETE /api/users/:id
 exports.deleteUser = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const user = await User.findByPk(req.params.id)
     if (!user) return res.status(404).json({ error: 'User not found.' })
 

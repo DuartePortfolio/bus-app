@@ -27,6 +27,10 @@ exports.getAllStops = async (req, res) => {
 // GET /api/stops/:id
 exports.getStopById = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const stop = await Stop.findByPk(req.params.id)
     if (!stop) return res.status(404).json({ error: 'Stop not found.' })
     res.json(stop)
@@ -86,6 +90,9 @@ exports.updateStop = async (req, res) => {
     if (!req.body) {
       return res.status(400).json({ error: 'Request body is required.' })
     }
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
 
     const { latitude, longitude, stop_name } = req.body
 
@@ -120,6 +127,10 @@ exports.updateStop = async (req, res) => {
 // DELETE /api/stops/:id
 exports.deleteStop = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const stop = await Stop.findByPk(req.params.id)
     if (!stop) return res.status(404).json({ error: 'Stop not found.' })
 

@@ -52,6 +52,10 @@ exports.getAllReadings = async (req, res) => {
 // GET /api/weather/:id
 exports.getReadingById = async (req, res) => {
   try {
+    const id = req.params.id
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+    }
     const reading = await Weather.findByPk(req.params.id)
     if (!reading) return res.status(404).json({ error: 'Weather reading not found.' })
     res.json(reading)
@@ -122,7 +126,6 @@ exports.createReading = async (req, res) => {
 exports.updateReading = async (req, res) => {
   try {
     const { id } = req.params
-
     if (!id || isNaN(Number(id))) {
       return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
     }
