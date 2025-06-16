@@ -54,7 +54,3 @@ async function loadCondutorAltTrips(driverId) {
         tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar trajetos alternativos.</td></tr>';
     }
 }
-
-// temp
-loadCondutorTrips(4);
-loadCondutorAltTrips(4);
