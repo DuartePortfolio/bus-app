@@ -35,10 +35,10 @@ async function loadCondutorAltTrips(driverId) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${trajectory.alt_trajectory_id}</td>
+                        <td></td>
                         <td>${trajectory.stop_id_1}</td>
                         <td></td>
                         <td>${trajectory.stop_id_2}</td>
-                        <td></td>
                         <td></td>
                         <td>${trajectory.alt_trajectory}</td>
                     `;
