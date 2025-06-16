@@ -88,11 +88,11 @@ option {
 
 .container-section {
   background: var(--background);
-  border-radius: 18px;
+  border-radius: 15px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.07);
   padding: 36px 32px 32px 32px;
   max-width: 600px;
-  margin: 40px auto auto auto;
+  margin: 40px auto 40px auto;
 }
 
 .container-title {
