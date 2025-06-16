@@ -33,19 +33,12 @@
         </div>
     </nav>
     <main>
-        <form class="login-form">
-            <div class="title">
-                <h2>Iniciar Sessão</h2>
-            </div>
-
-            <label for="username">Username</label>
-            <input type="text" id="username" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" required>
-            
-            <button type="submit">Iniciar sessão</button>
+        <form id="login-form">
+            <input name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button type="submit">Entrar</button>
         </form>
+        <script src="../js/login.js"></script>
     </main>
 </body>
 </html>
