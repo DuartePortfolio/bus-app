@@ -15,60 +15,78 @@
 header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 20px;
-  font-size: 1.5rem;
+  align-items: center;
+  padding: 26px 40px 18px 40px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
 }
 
 .logo {
-  background: #ccc;
-  width: 220px;
-  height: 90px;
+  background: none;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 2px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
 }
 
-.header-actions a, .header-actions span{
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  margin-right: 20px;
+.logo::before {
+  content: "🚌";
+  font-size: 2.2rem;
+  margin-right: 8px;
 }
 
-.header-actions a:hover {
-  color: var(--accent);
-  transition: color 0.2s;
-}
-
+/* navbar */
 .navbar {
-  background: var(--primary) !important;
-  font-size: 1.2rem;
-  font-weight: 500;
+  background: var(--background) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 0 0 18px 18px;
+  margin-bottom: 18px;
+  padding: 0 40px;
+  height: 60px;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
 }
 
 .nav-link {
-  color: var(--background);
-  margin: 0px 35px 0px 15px;
-  text-decoration: none;
+  text-align: center;
+  color: var(--primary) !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+  margin-right: 30px;
+  width: 120px
 }
 
-.nav-link:hover {
-  color: var(--accent);
+.nav-link:hover, .nav-link.active {
+  background: var(--primary);
+  color: var(--background) !important;
 }
-
 
 /* body */
 body {
   font-family: "Inter", sans-serif;
   margin: 0;
-  background: var(--background);
+  background-color: #e3f6fc;
 }
 
 
 /* buttons */
 .create-btn {
-  background: #0080bd;
+  background: var(--primary)   ;
   color: #fff;
   border: none;
   border-radius: 10px;
