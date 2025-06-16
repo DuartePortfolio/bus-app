@@ -4,15 +4,12 @@ const AlternativeTrajectory = db.AlternativeTrajectory
 // GET /api/alternative-trajectories
 exports.getAllAlternativeTrajectories = async (req, res) => {
   try {
-    const { stop_id_1, stop_id_2 } = req.query
+    const { stop_id_1, stop_id_2, driver_id } = req.query
 
     let whereClause = {}
-    if (stop_id_1) {
-      whereClause.stop_id_1 = stop_id_1
-    }
-    if (stop_id_2) {
-      whereClause.stop_id_2 = stop_id_2
-    }
+    if (stop_id_1) { whereClause.stop_id_1 = stop_id_1 }
+    if (stop_id_2) { whereClause.stop_id_2 = stop_id_2 }
+    if (driver_id) { whereClause.driver_id = driver_id }
 
     const altTrajs = await AlternativeTrajectory.findAll({ where: whereClause })
     res.json(altTrajs)

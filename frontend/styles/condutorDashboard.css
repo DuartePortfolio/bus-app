@@ -58,3 +58,7 @@ h2, h3 {
 .alt-table th, .alt-table td {
   font-size: 1rem;
 }
+
+.text {
+  color: var(--text-sec)
+}

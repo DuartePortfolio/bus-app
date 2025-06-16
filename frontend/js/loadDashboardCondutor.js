@@ -21,7 +21,6 @@ async function loadCondutorTrips(driverId) {
     }
 }
 
-// arrumar
 async function loadCondutorAltTrips(driverId) {
     const tbody = document.getElementById('condutor-alttrajectories-tbody');
     tbody.innerHTML = '<tr><td colspan="7">A carregar...</td></tr>';
@@ -29,24 +28,30 @@ async function loadCondutorAltTrips(driverId) {
         const res = await fetch(`http://localhost:3000/api/trips?driver_id=${driverId}`);
         const trips = await res.json();
         tbody.innerHTML = '';
+        let found = false;
         trips.forEach(trip => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${trajectory.alt_trajectory_id}</td>
-                <td>sitio1</td>
-                <td>paragem1</td>
-                <td>sitio2</td>
-                <td>paragem2</td>
-                <td>seguir</td>
-                <td>${trajectory.alt_trajectory}</td>
-            `;
-            tbody.appendChild(tr);
+            if (trip.alternative_trajectories && trip.alternative_trajectories.length) {
+                trip.alternative_trajectories.forEach(trajectory => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${trajectory.alt_trajectory_id}</td>
+                        <td>${trajectory.stop_id_1}</td>
+                        <td></td>
+                        <td>${trajectory.stop_id_2}</td>
+                        <td></td>
+                        <td></td>
+                        <td>${trajectory.alt_trajectory}</td>
+                    `;
+                    tbody.appendChild(tr);
+                    found = true;
+                });
+            }
         });
-        if (tbody.innerHTML === '') {
+        if (!found) {
             tbody.innerHTML = '<tr><td colspan="7">Sem trajetos alternativos.</td></tr>';
         }
     } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar viagens do condutor.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar trajetos alternativos.</td></tr>';
     }
 }
 
