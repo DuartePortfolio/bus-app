@@ -4,7 +4,7 @@ label {
   text-align: right;
 }
 
-.login-form {
+#login-form {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -13,7 +13,7 @@ label {
   margin-bottom: 200px;
 }
 
-.login-form input {
+#login-form input {
   background: var(--secondary);
   border: none;
   border-radius: 10px;
