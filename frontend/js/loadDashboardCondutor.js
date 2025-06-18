@@ -36,9 +36,9 @@ async function loadCondutorAltTrips(driverId) {
                     tr.innerHTML = `
                         <td>${trajectory.alt_trajectory_id}</td>
                         <td></td>
-                        <td>${trajectory.stop_id_1}</td>
+                        <td>${trajectory.stop_id_1?.stop_name}</td>
                         <td></td>
-                        <td>${trajectory.stop_id_2}</td>
+                        <td>${trajectory.stop_id_2?.stop_name}</td>
                         <td></td>
                         <td>${trajectory.alt_trajectory}</td>
                     `;
@@ -54,7 +54,3 @@ async function loadCondutorAltTrips(driverId) {
         tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar trajetos alternativos.</td></tr>';
     }
 }
-
-// temp
-loadCondutorTrips(4);
-loadCondutorAltTrips(4);

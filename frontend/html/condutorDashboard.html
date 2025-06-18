@@ -13,33 +13,30 @@
     
     <link rel="stylesheet" href="../styles/condutorDashboard.css">
     
-    
 </head>
 <body>
     <header>
-        <div class="logo">Logotipo</div>
-        <div class="header-actions">
-            <a href="../html/login.html">Login</a>
-        </div>
+        <div class="logo">BusApp</div>
     </header>
-    <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="../horarios.html">Horários</a>
-                    <a class="nav-link" href="../html/percursos.html">Percursos</a>
-                </div>
-            </div>
+    <nav class="navbar">
+        <div class="navbar-nav">
+            <a class="nav-link" href="../horarios.html">Horários</a>
+            <a class="nav-link" href="percursos.html">Percursos</a>
         </div>
+        <a class="nav-link" href="login.html">Login</a>
     </nav>
+
     <main>
-        <p class="welcome">Bem-vindo, (nome do utilizador)</p>
         <div class="dashboard-box">
             <div class="dashboard-content">
-                <div>
-                    <h2>Viagens para hoje</h2>
+                <div class="main-section">
+                    <p class="welcome">Bem-vindo, {user}</p>
+                    <div class="section-header">
+                        <h2>Viagens para hoje</h2>
+
+                        <input type="date" name="calendar" id="adminCalendar" class="create-btn">
+                    </div>
+
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -50,21 +47,20 @@
                                 <th>Trajetos Alternativos</th>
                             </tr>
                         </thead>
+
                         <tbody id="condutor-trips-tbody">
-                            <tr>
-                                <td>34</td>
-                                <td>09:00</td>
-                                <td>Courelas - Centro</td>
-                                <td>PT-1234</td>
-                                <td>4, 6</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div>
-                <h3>Trajetos Alternativos</h3>
-                <table class="alt-table">
+
+            <div class="section-row">
+                <div class="section-header">
+                    <h3>Trajetos Alternativos</h3>
+                </div>
+
+                <table class="main-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -77,22 +73,7 @@
                         </tr>
                     </thead>
                     <tbody id="condutor-alttrajectories-tbody">
-                        <tr>
-                            <td>4</td>
-                            <td>Courelas</td>
-                            <td>Tasquinha Janota</td>
-                            <td></td>
-                            <td></td>
-                            <td>Rua das Cruzes</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Barreiros</td>
-                            <td>Cruz Vermelha</td>
-                            <td></td>
-                            <td></td>
-                            <td>Bairro de Baixo</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>

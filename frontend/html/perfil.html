@@ -17,95 +17,91 @@
 </head>
 <body>
     <header>
-        <div class="logo">Logotipo</div>
-        <div class="header-actions">
-            <a href="../html/login.html">Login</a>
-        </div>
+        <div class="logo">BusApp</div>
     </header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="../horarios.html" >Horários</a>
-                    <a class="nav-link" href="../html/percursos.html">Percursos</a>
-                </div>
-            </div>
+    <nav class="navbar">
+        <div class="navbar-nav">
+            <a class="nav-link" href="../horarios.html">Horários</a>
+            <a class="nav-link" href="percursos.html">Percursos</a>
         </div>
+        <a class="nav-link" href="login.html">Login</a>
     </nav>
     <main>
-        <div class="profile-container">
-            <h2>Perfil</h2>
-            <div class="profile-card">
-                <div class="profile-header">
-                    <img src="" alt="Foto de perfil" class="profile-img">
-                    <div class="profile-info">
-                        <div class="profile-name">Teste da Silva</div>
-                        <div class="profile-role">Administrador</div>
+        <div class="container-box">
+            <div class="container-content">
+                <div class="main-section">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <img src="" alt="Foto de perfil" class="profile-img">
+                            <div class="profile-info">
+                                <div class="profile-name">Teste da Silva</div>
+                                <div class="profile-role">Administrador</div>
+                            </div>
+                            <button class="create-btn">Alterar Foto de Perfil</button>
+                        </div>
                     </div>
-                    <button class="create-btn">Alterar Foto de Perfil</button>
                 </div>
-            </div>
-            <div class="profile-card">
-                <div class="profile-section-header">
-                    <span>Informação Pessoal</span>
 
-                    <!-- Editar Informações Modal -->
-                    <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalEditarInformacoes">
-                        Editar Informações
-                    </button>
-                    <div class="modal fade" id="modalEditarInformacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5">Editar Informações</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="rota-form">
-                                        <div class="form-group">
-                                            <label>Nome</label>
-                                            <input type="text" placeholder="Nome">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Sobrenome</label>
-                                            <input type="text" placeholder="Sobrenome">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email</label>
-                                            <input type="text" placeholder="Email">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Guardar</button>
+                <div class="profile-card">
+                    <div class="profile-section-header">
+                        <span>Informação Pessoal</span>
+
+                        <!-- Editar Informações Modal -->
+                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalEditarInformacoes">
+                            Editar Informações
+                        </button>
+                        <div class="modal fade" id="modalEditarInformacoes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5">Editar Informações</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="rota-form">
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input type="text" placeholder="Nome">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Sobrenome</label>
+                                                <input type="text" placeholder="Sobrenome">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" placeholder="Email">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Guardar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="profile-details">
-                    <div class="profile-row">
-                        <div>
-                            <div class="label">Nome</div>
-                            <div class="value">Teste</div>
+                    <div class="profile-details">
+                        <div class="profile-row">
+                            <div>
+                                <div class="label">Nome</div>
+                                <div class="value">Teste</div>
+                            </div>
+                            <div>
+                                <div class="label">Sobrenome</div>
+                                <div class="value">da Silva</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="label">Sobrenome</div>
-                            <div class="value">da Silva</div>
+                        <div class="profile-row">
+                            <div>
+                                <div class="label">Endereço Email</div>
+                                <div class="value">teste@gmail.com</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="profile-row">
-                        <div>
-                            <div class="label">Endereço Email</div>
-                            <div class="value">teste@gmail.com</div>
-                        </div>
-                    </div>
-                    <div class="profile-row">
-                        <div>
-                            <div class="label">Cargo</div>
-                            <div class="value">Administrador</div>
+                        <div class="profile-row">
+                            <div>
+                                <div class="label">Cargo</div>
+                                <div class="value">Administrador</div>
+                            </div>
                         </div>
                     </div>
                 </div>

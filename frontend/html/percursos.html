@@ -15,62 +15,58 @@
 </head>
 <body>
     <header>
-        <div class="logo">Logotipo</div>
-        <div class="header-actions">
-            <a href="../html/login.html">Login</a>
-        </div>
+        <div class="logo">BusApp</div>
     </header>
-    <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="../horarios.html">Horários</a>
-                <a class="nav-link" href="../html/percursos.html">Percursos</a>
-            </div>
-            </div>
+    <nav class="navbar">
+        <div class="navbar-nav">
+            <a class="nav-link" href="../horarios.html">Horários</a>
+            <a class="nav-link" href="percursos.html">Percursos</a>
         </div>
+        <a class="nav-link" href="../html/login.html">Login</a>
     </nav>
     <main>
-        <form id="form">
-            <div class="selections">
-                <div class="optgroup">
-                    <label for="carreira">Carreira</label>
-                    <select name="carreira" id="carreira">
-                        <option disabled selected hidden class="hidden">Escolha</option>
-                        <option value="carreira_1">Carreira 1</option>
-                        <option value="carreira_2">Carreira 2</option>
-                        <option value="carreira_3">Carreira 3</option>
-                        <option value="carreira_4">Carreira 4</option>
-                    </select>
+        <section class="container-section">
+            <h2 class="container-title">Consulta de Percursos</h2>
+            <form id="form" class="container-form">
+                <div class="selections">
+                    <div class="optgroup">
+                        <label for="carreira">Carreira</label>
+                        <select name="carreira" id="carreira">
+                            <option disabled selected hidden>Escolha</option>
+                            <option value="carreira_1">Carreira 1</option>
+                            <option value="carreira_2">Carreira 2</option>
+                            <option value="carreira_3">Carreira 3</option>
+                            <option value="carreira_4">Carreira 4</option>
+                        </select>
+                    </div>
+                    <div class="optgroup">
+                        <label for="percurso">Percurso</label>
+                        <select name="percurso" id="percurso">
+                            <option disabled selected hidden>Escolha</option>
+                            <option value="percurso_1">Percurso 1</option>
+                            <option value="percurso_2">Percurso 2</option>
+                            <option value="percurso_3">Percurso 3</option>
+                            <option value="percurso_4">Percurso 4</option>
+                        </select>
+                    </div>
+                    <div class="optgroup">
+                        <label for="sentido">Sentido</label>
+                        <select name="sentido" id="sentido">
+                            <option disabled selected hidden>Escolha</option>
+                            <option value="sentido_direto">Sentido Direto</option>
+                            <option value="sentido_contrario">Sentido Contrário</option>
+                        </select>
+                    </div>
                 </div>
-                
-                
-                <div class="optgroup">
-                    <label for="percurso">Percurso</label>
-                    <select name="percurso" id="percurso">
-                        <option disabled selected hidden class="hidden">Escolha</option>
-                        <option value="percurso_1">Percurso 1</option>
-                        <option value="percurso_2">Percurso 2</option>
-                        <option value="percurso_3">Percurso 3</option>
-                        <option value="percurso_4">Percurso 4</option>
-                    </select>
-
-                    <label for="sentido">Sentido</label>
-                    <select name="sentido" id="sentido">
-                        <option disabled selected hidden class="hidden">Escolha</option>
-                        <option value="sentido_direto">Sentido Direto</option>
-                        <option value="sentido_contrario">Sentido Contrário</option>
-                    </select>
+                <div class="button-row">
+                    <button type="submit" class="create-btn">
+                        Ver Percursos &#8594;
+                    </button>
                 </div>
-            </div>            
-            <div class="button-row">
-                <button type="submit">
-                    Ver Percursos<span class="arrow">&#8594;</span>
-                </button>
+            </form>
+            <div id="container-results" class="container-results">
             </div>
-        </form>
+        </section>
     </main>
 </body>
 </html>

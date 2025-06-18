@@ -1,55 +1,100 @@
-main {
-  margin: 40px auto 0 auto;
-  max-width: 400px;
+label {
+  font-size: 1.7rem;
+  width: 90px;
+  text-align: right;
 }
 
-.login-form {
+#login-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  margin-top: 30px;
+  gap: 18px;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 200px;
 }
 
-.login-form h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-}
-
-.login-form label {
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-  margin-top: 12px;
-}
-
-.login-form input {
+#login-form input {
   background: var(--secondary);
   border: none;
   border-radius: 10px;
   font-size: 1.2rem;
   padding: 10px 14px;
-  margin-bottom: 4px;
 }
 
-.login-form button {
-  background:  var(--primary);
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cred {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.cred label {
+  font-size: 1.1rem;
+  color: var(--text-sec);
+  font-weight: 500;
+}
+
+.cred input {
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s;
+  background-color: var(--secondary);
+  width: 250px;
+}
+
+.cred input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.create-btn {
+  background: var(--primary);
   color: var(--background);
-  font-size: 1.3rem;
-  padding: 12px 0;
   border: none;
   border-radius: 10px;
+  margin-top: 25px;
+  padding: 5px 25px;
   cursor: pointer;
-  margin-top: 24px;
-  font-weight: bold;
-}
-
-.login-form .signup-link {
-  text-align: center;
-  margin-top: 18px;
+  font-weight: 600;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  width: 220px;
+  justify-content: center !important;
 }
 
-.login-form .signup-link a {
-  color: var(--text);
-  text-decoration: none;
+.create-btn:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.container-section {
+  background: var(--background);
+  border-radius: 15px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 36px 32px 32px 32px;
+  max-width: 600px;
+  margin: 40px auto 40px auto;
+}
+
+.container-title {
+  text-align: center;
+  color: var(--primary);
+  font-size: 2.1rem;
+  margin-bottom: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
