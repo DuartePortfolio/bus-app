@@ -33,47 +33,50 @@
                     <p class="welcome">Bem-vindo, {user}</p>
                     <div class="section-header">
                         <h2>Viagens para hoje</h2>
-                    
-                    
-                        <!-- Adicionar Viagem Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarViagem">
-                            Adicionar Viagem
-                        </button>
-                        <div class="modal fade" id="modalAdicionarViagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Viagem</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="add-trip-btn"></button>
+
+                        <div class="buttons">
+                            <input type="date" name="calendar" id="adminCalendar" class="create-btn">
+
+                            <!-- Adicionar Viagem Modal -->
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarViagem">
+                                Adicionar Viagem
+                            </button>
+                            <div class="modal fade" id="modalAdicionarViagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Viagem</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="add-trip-btn"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="viagem-form">
+                                                <div class="form-group">
+                                                    <label for="viagem-data">Data e Hora</label>
+                                                    <input type="text" id="viagem-data" placeholder="2025-04-03 19:00:00" name="start_time">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="viagem-rota">Rota</label>
+                                                    <input type="text" id="viagem-rota" placeholder="ID Rota" name="route_id">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="viagem-veiculo">Veículo</label>
+                                                    <input type="text" id="viagem-veiculo" placeholder="ID Veículo" name="vehicle_id">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="viagem-condutor">Condutor</label>
+                                                    <input type="text" id="viagem-condutor" placeholder="ID Condutor" name="driver_id">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="viagem-trajetos">Trajetos Alternativos</label>
+                                                    <input type="text" id="viagem-trajetos" placeholder="ID Trajeto (não obrigatório)" name="alternative_routes">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="modal-body">
-                                        <form class="viagem-form">
-                                            <div class="form-group">
-                                                <label for="viagem-data">Data e Hora</label>
-                                                <input type="text" id="viagem-data" placeholder="2025-04-03 19:00:00" name="start_time">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="viagem-rota">Rota</label>
-                                                <input type="text" id="viagem-rota" placeholder="ID Rota" name="route_id">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="viagem-veiculo">Veículo</label>
-                                                <input type="text" id="viagem-veiculo" placeholder="ID Veículo" name="vehicle_id">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="viagem-condutor">Condutor</label>
-                                                <input type="text" id="viagem-condutor" placeholder="ID Condutor" name="driver_id">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="viagem-trajetos">Trajetos Alternativos</label>
-                                                <input type="text" id="viagem-trajetos" placeholder="ID Trajeto (não obrigatório)" name="alternative_routes">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>
