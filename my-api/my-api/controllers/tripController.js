@@ -33,7 +33,7 @@ exports.getTripById = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Trip ID is required and must be a valid number.' })
     }
     const trip = await Trip.findByPk(req.params.id, {
       include: [
@@ -81,9 +81,6 @@ exports.createTrip = async (req, res) => {
     }
     if (!Number.isInteger(driver_id)) {
       return res.status(400).json({ error: 'driver_id must be a number.' })
-    }
-    if (typeof start_time !== 'string') {
-      return res.status(400).json({ error: 'start_time must be a string.' })
     }
     // Validate start_time as a valid date string
     if (isNaN(Date.parse(start_time))) {
@@ -139,12 +136,14 @@ exports.addAlternativeTrajectoryToTrip = async (req, res) => {
 }
 
 // PATCH /api/trips/:id
+// É preciso arranjar só dá erro 500
 exports.updateTrip = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Trip ID is required and must be a valid number.' })
     }
+    
     const { route_id, vehicle_id, driver_id, start_time } = req.body
     const trip = await Trip.findByPk(req.params.id)
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })
@@ -160,7 +159,7 @@ exports.deleteTrip = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Trip ID is required and must be a valid number.' })
     }
     const trip = await Trip.findByPk(req.params.id)
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })
@@ -176,7 +175,7 @@ exports.removeAlternativeTrajectoryFromTrip = async (req, res) => {
   try {
     const { id, trajectory_id } = req.params
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'IDs are required and must be a valid number.' })
     }
     const trip = await Trip.findByPk(id)
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })

@@ -23,7 +23,7 @@ exports.getAlternativeTrajectoryById = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Alternative trajectory ID is required and must be a valid number.' })
     }
     const altTraj = await AlternativeTrajectory.findByPk(req.params.id)
     if (!altTraj) return res.status(404).json({ error: 'Alternative trajectory not found.' })
@@ -84,7 +84,7 @@ exports.updateAlternativeTrajectory = async (req, res) => {
   try {
     const { id } = req.params
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Alternative trajectory ID is required and must be a valid number.' })
     }
 
     if (!req.body) {
@@ -131,7 +131,7 @@ exports.deleteAlternativeTrajectory = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Alternative trajectory ID is required and must be a valid number.' })
     }
     const altTraj = await AlternativeTrajectory.findByPk(req.params.id)
     if (!altTraj) return res.status(404).json({ error: 'Alternative trajectory not found.' })

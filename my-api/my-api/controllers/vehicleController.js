@@ -88,6 +88,9 @@ exports.updateVehicle = async (req, res) => {
     if (!req.body) {
       return res.status(400).json({ error: 'Request body is required.' })
     }
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ error: 'Vehicle ID is required and must be a valid number.' })
+    }
     const plate_number = req.body.plate_number
     const capacity = req.body.capacity !== undefined ? Number(req.body.capacity) : undefined
 
@@ -129,7 +132,7 @@ exports.deleteVehicle = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Vehicle ID is required and must be a valid number.' })
     }
     const vehicle = await Vehicle.findByPk(req.params.id)
     if (!vehicle) return res.status(404).json({ error: 'Vehicle not found.' })

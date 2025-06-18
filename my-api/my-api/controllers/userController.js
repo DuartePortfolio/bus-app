@@ -62,7 +62,7 @@ exports.createUser = async (req, res) => {
     }
     // Validation to guarantee contact is a number
     if (isNaN(Number(contact)) || !/^\d+$/.test(String(contact))) {
-      return res.status(400).json({ error: 'Contact must be a positive number.' })
+      return res.status(400).json({ error: 'Contact must be a positive integer.' })
     }
 
     const existingUser = await User.findOne({ where: { email } })
@@ -119,7 +119,7 @@ exports.deleteUser = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'User ID is required and must be a valid number.' })
     }
     const user = await User.findByPk(req.params.id)
     if (!user) return res.status(404).json({ error: 'User not found.' })

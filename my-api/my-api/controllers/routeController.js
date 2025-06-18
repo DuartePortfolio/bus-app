@@ -27,7 +27,7 @@ exports.getRouteById = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Route ID is required and must be a valid number.' })
     }
     const route = await Route.findByPk(req.params.id)
     if (!route) return res.status(404).json({ error: 'Route not found.' })
@@ -42,7 +42,7 @@ exports.getStopsOfRoute = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Route ID is required and must be a valid number.' })
     }
     const { stop_order } = req.query
     const includeOptions = {
@@ -97,7 +97,7 @@ exports.addStopToRoute = async (req, res) => {
     const { stop_id } = req.body
     const { id } = req.params
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Route ID is required and must be a valid number.' })
     }
     // Parse stop_order to number
     const stop_order = Number(req.body.stop_order)
@@ -138,7 +138,7 @@ exports.updateRoute = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Route ID is required and must be a valid number.' })
     }
     const { route_name } = req.body
     const route = await Route.findByPk(req.params.id)
@@ -156,7 +156,7 @@ exports.deleteRoute = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Route ID is required and must be a valid number.' })
     }
     const route = await Route.findByPk(req.params.id)
     if (!route) return res.status(404).json({ error: 'Route not found.' })
@@ -172,7 +172,7 @@ exports.deleteStopFromRoute = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Route IDs are required and must be a valid number.' })
     }
     const route_id = Number(req.params.id) // ensures Route ID and Stop ID is a number
     const stop_id = Number(req.params.stop_id)

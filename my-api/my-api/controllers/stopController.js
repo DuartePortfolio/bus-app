@@ -29,7 +29,7 @@ exports.getStopById = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Stop ID is required and must be a valid number.' })
     }
     const stop = await Stop.findByPk(req.params.id)
     if (!stop) return res.status(404).json({ error: 'Stop not found.' })
@@ -91,7 +91,7 @@ exports.updateStop = async (req, res) => {
       return res.status(400).json({ error: 'Request body is required.' })
     }
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Stop ID is required and must be a valid number.' })
     }
 
     const { latitude, longitude, stop_name } = req.body
@@ -101,13 +101,13 @@ exports.updateStop = async (req, res) => {
       return res.status(404).json({ error: 'Stop not found.' })
     }
 
-    if (latitude !== undefined && typeof latitude !== 'number') {
+    if (isNaN(latitude)) {
       return res.status(400).json({ error: 'latitude must be a number.' })
     }
-    if (longitude !== undefined && typeof longitude !== 'number') {
+    if (isNaN(longitude)) {
       return res.status(400).json({ error: 'longitude must be a number.' })
     }
-    if (stop_name !== undefined && typeof stop_name !== 'string') {
+    if (typeof stop_name !== 'string') {
       return res.status(400).json({ error: 'stop_name must be a string.' })
     }
 
@@ -129,7 +129,7 @@ exports.deleteStop = async (req, res) => {
   try {
     const id = req.params.id
     if (!id || isNaN(Number(id))) {
-      return res.status(400).json({ error: 'Reading ID is required and must be a valid number.' })
+      return res.status(400).json({ error: 'Stop ID is required and must be a valid number.' })
     }
     const stop = await Stop.findByPk(req.params.id)
     if (!stop) return res.status(404).json({ error: 'Stop not found.' })
