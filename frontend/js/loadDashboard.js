@@ -127,9 +127,29 @@ async function loadStops() {
                 <td>${stop.latitude}</td>
                 <td>${stop.longitude}</td>
                 <td>${stop.stop_name}</td>
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-stop actionBtn"
+                        data-id="${stop.stop_id}"
+                        data-name="${stop.latitude}"
+                        data-stops="${stop.longitude}"
+                        data-latitude="${stop.stop_name}">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete-route stop" data-id="${stop.stop_id}">Apagar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-edit-stop').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-stop-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-stop-latitude').value = this.getAttribute('data-latitude');
+                document.getElementById('admin-stop-longitude').value = this.getAttribute('data-stops');
+                document.getElementById('admin-stop-name').value = this.getAttribute('data-name');
+                const modal = new bootstrap.Modal(document.getElementById('adminStopModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar paragens.</td></tr>';

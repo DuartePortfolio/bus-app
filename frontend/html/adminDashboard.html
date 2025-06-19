@@ -27,9 +27,20 @@
         <a class="nav-link" href="login.html">Login</a>
     </nav>
     <main>
+        <div class="navigation">
+            <a href="#trips-section">Viagens para Hoje</a>
+            <a href="#routes-section">Rotas</a>
+            <a href="#stops-section">Paragens</a>
+            <a href="#vehicles-section">Veículos</a>
+            <a href="#alternative-trajectories-section">Trajetos Alternativos</a>
+            <a href="#weather-section">Meteorologia</a>
+            <a href="#users-section">Utilizadores</a>
+            <a href="#admin-requests-section">Pedidos dos Condutores</a>
+        </div>
+
         <div class="dashboard-box">
             <div class="dashboard-content">
-                <div class="main-section">
+                <div class="main-section" id="trips-section">
                     <p class="welcome">Bem-vindo, {user}</p>
                     <div class="section-header">
                         <h2>Viagens para hoje</h2>
@@ -97,10 +108,9 @@
 
                         </tbody>
                     </table>
-                    </div>
                 </div>
 
-                <div class="section-row">
+                <div class="section-row" id="routes-section">
                     <div class="section-header">
                         <h3>Rotas</h3>
                     
@@ -150,7 +160,7 @@
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="stops-section">
                     <div class="section-header">
                         <h3>Paragens</h3>
 
@@ -196,36 +206,16 @@
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                                 <th>Nome</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="stops-tbody">
-                            <tr>
-                                <td>1147</td>
-                                <td>32.666400000</td>
-                                <td>-16.92450000</td>
-                                <td>Rua 4 Pico Romeiras, D</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>1098</td>
-                                <td>32.666400000</td>
-                                <td>-16.92450000</td>
-                                <td>Rua 4 Pico Romeiras, D</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>1100</td>
-                                <td>32.666400000</td>
-                                <td>-16.92450000</td>
-                                <td>Rua 4 Pico Romeiras, D</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="vehicles-section">
                     <div class="section-header">
                         <h3>Veículos</h3>
 
@@ -292,7 +282,7 @@
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="alternative-trajectories-section">
                     <div class="section-header">
                         <h3>Trajetos Alternativos</h3>
 
@@ -367,7 +357,7 @@
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="weather-section">
                     <div class="section-header">
                         <h3>Meteorologia</h3>
                         
@@ -437,7 +427,7 @@
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="users-section">
                     <div class="section-header">
                         <h3>Utilizadores</h3>
                         
@@ -501,7 +491,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="section-row">
+                
+                <div class="section-row" id="admin-requests-section">
                     <div class="section-header">
                         <h3>Pedidos dos Condutores</h3>
                     </div>
@@ -524,7 +515,6 @@
                     </table>
                 </div>
                 
-                <!-- Adicionar Pedido Modal -->
                 <div class="section-row">
                     <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#adminRequestModal">
                         Pedidos
@@ -561,7 +551,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     </main>
     <script src="../js/loadDashboard.js"></script>
 
@@ -621,7 +611,7 @@
                         <input id="admin-route-name" type="text" class="form-control" placeholder="Nome">
                     </div>
                         <div class="form-group mb-3">
-                        <label for="admin-route-">Paragens</label>
+                        <label for="admin-route-stops">Paragens</label>
                         <input id="admin-route-stops" type="text" class="form-control" placeholder="Paragens">
                     </div>
                 </div>
@@ -632,6 +622,64 @@
         </div>
     </div>
 
+    <!-- Modal de Editar Paragens -->
+    <div class="modal fade" id="adminStopModal" tabindex="-1" aria-labelledby="adminStopModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-stop-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminStopModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-stop-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-latitude">Latitude</label>
+                        <input id="admin-stop-latitude" type="text" class="form-control" placeholder="Latitude">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-longitude">Longitude</label>
+                        <input id="admin-stop-longitude" type="text" class="form-control" placeholder="Longitude">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-name">Nome</label>
+                        <input id="admin-stop-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+    <!-- Modal de Editar Veículos -->
+    <div class="modal fade" id="adminStopModal" tabindex="-1" aria-labelledby="adminStopModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-stop-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminStopModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-stop-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-latitude">Latitude</label>
+                        <input id="admin-stop-latitude" type="text" class="form-control" placeholder="Latitude">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-longitude">Longitude</label>
+                        <input id="admin-stop-longitude" type="text" class="form-control" placeholder="Longitude">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-name">Nome</label>
+                        <input id="admin-stop-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
