@@ -85,16 +85,16 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Horas</th>
+                                <th>Data e Hora</th>
                                 <th>Rota</th>
                                 <th>Veículo</th>
                                 <th>Condutor</th>
                                 <th>Trajetos Alternativos</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="trips-tbody">
-                            
+
                         </tbody>
                     </table>
                     </div>
@@ -119,7 +119,11 @@
                                         <form class="rota-form">
                                             <div class="form-group">
                                                 <label>Nome</label>
-                                                <input type="text" placeholder="Nome"  name="route_name">
+                                                <input type="text" placeholder="Nome" name="route_name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Paragens</label>
+                                                <input type="text" placeholder="Paragens" name="route_name">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -137,28 +141,11 @@
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>Paragens</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="routes-tbody">
-                            <tr>
-                                <td>3</td>
-                                <td>Courelas - Centro</td>
-                                <td><button class="view-btn">Ver paragens</button></td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Centro - Courelas</td>
-                                <td><button class="view-btn">Ver paragens</button></td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Barreiros - Avenida</td>
-                                <td><button class="view-btn">Ver paragens</button></td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -445,16 +432,7 @@
                             </tr>
                         </thead>
                         <tbody id="weather-tbody">
-                            <tr>
-                                <td>34</td>
-                                <td>2025-04-03 07:30:00</td>
-                                <td>22.50</td>
-                                <td>0.00</td>
-                                <td>5.20</td>
-                                <td>Praça Povo</td>
-                                <td>Céu limpo durante toda a manhã.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -519,22 +497,7 @@
                             </tr>
                         </thead>
                         <tbody id="users-tbody">
-                            <tr>
-                                <td>4</td>
-                                <td>João Ferreira</td>
-                                <td>jf@gmail.com</td>
-                                <td>Condutor</td>
-                                <td>910102345</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Teste da Silva</td>
-                                <td>teste@gmail.com</td>
-                                <td>Admin</td>
-                                <td>910000123</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -561,8 +524,7 @@
                     </table>
                 </div>
                 
-                <!-- Modal for updating request -->
-
+                <!-- Adicionar Pedido Modal -->
                 <div class="section-row">
                     <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#adminRequestModal">
                         Pedidos
@@ -602,5 +564,74 @@
         </main>
     </main>
     <script src="../js/loadDashboard.js"></script>
+
+
+    <!--------------- MODAIS --------------->
+    
+    <!-- Modal de Editar Viagem -->
+    <div class="modal fade" id="adminTripModal" tabindex="-1" aria-labelledby="adminTripModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-trip-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminTripModalLabel">Atualizar Viagem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-trip-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-trip-time">Data e Hora</label>
+                        <input id="admin-trip-time" type="text" class="form-control" placeholder="Horas">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-trip-route">Rota</label>
+                        <input id="admin-trip-route" type="text" class="form-control" placeholder="Rota">
+                    </div>
+                        <div class="form-group mb-3">
+                        <label for="admin-trip-vehicle">Veículo</label>
+                        <input id="admin-trip-vehicle" type="text" class="form-control" placeholder="Veículo">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-trip-driver">Condutor</label>
+                        <input id="admin-trip-driver" type="text" class="form-control" placeholder="Condutor">
+                    </div>
+                        <div class="form-group mb-3">
+                        <label for="admin-trip-alttraj">Trajetos Alternativos</label>
+                        <input id="admin-trip-alttraj" class="form-control" placeholder="Trajetos"></input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Rotas -->
+    <div class="modal fade" id="adminRouteModal" tabindex="-1" aria-labelledby="adminRouteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-route-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminRouteModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-route-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-route-name">Nome</label>
+                        <input id="admin-route-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                        <div class="form-group mb-3">
+                        <label for="admin-route-">Paragens</label>
+                        <input id="admin-route-stops" type="text" class="form-control" placeholder="Paragens">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 </body>
 </html>

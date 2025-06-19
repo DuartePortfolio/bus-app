@@ -87,3 +87,8 @@ body {
   margin: 0;
   background-color: #e3f6fc;
 }
+
+.actionBtn {
+  width:60px;
+  text-align: center;
+}
