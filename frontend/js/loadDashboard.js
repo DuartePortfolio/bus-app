@@ -4,9 +4,7 @@ async function loadTrips() {
     try {
 
         const res = await fetch('http://localhost:3000/api/trips', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         const trips = await res.json();
         tbody.innerHTML = '';
@@ -23,55 +21,33 @@ async function loadTrips() {
                 <td>${trip.driver?.name || trip.driver_id}</td>
                 <td>${altTraj}</td>
                 <td>
-                    <button type="button" class="btn btn-primary icon-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        &#9998;
+                    <button class="btn btn-primary btn-sm btn-edit-trip actionBtn"
+                        data-id="${trip.trip_id}"
+                        data-time="${trip.start_time}"
+                        data-route="${trip.route?.route_name || trip.route_id}"
+                        data-vehicle="${trip.vehicle?.plate_number || trip.vehicle_id}"
+                        data-driver="${trip.driver?.name || trip.driver_id}"
+                        data-alttraj="${altTraj}">
+                        Editar
                     </button>
-                                    
-                    <!-- Atualizar Viagem Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar Viagem</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="viagem-form">
-                                        <div class="form-group">
-                                            <label>Data</label>
-                                            <input type="text" placeholder="Data">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Horas</label>
-                                            <input type="text" placeholder="Horas">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Rota</label>
-                                            <input type="text" placeholder="Rota">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Veículo</label>
-                                            <input type="text" placeholder="Veículo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Condutor</label>
-                                            <input type="text" placeholder="Condutor">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Trajetos Alternativos</label>
-                                            <input type="text" placeholder="Trajetos">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="btn btn-danger btn-sm btn-delete-trip actionBtn" data-id="${trip.trip_id}">Apagar</button>
                 </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        // Add event listeners for edit buttons
+        tbody.querySelectorAll('.btn-edit-trip').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-trip-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-trip-time').value = this.getAttribute('data-time');
+                document.getElementById('admin-trip-route').value = this.getAttribute('data-route');
+                document.getElementById('admin-trip-vehicle').value = this.getAttribute('data-vehicle');
+                document.getElementById('admin-trip-driver').value = this.getAttribute('data-driver');
+                document.getElementById('admin-trip-alttraj').value = this.getAttribute('data-alttraj');
+                const modal = new bootstrap.Modal(document.getElementById('adminTripModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar viagens.</td></tr>';
@@ -94,9 +70,28 @@ async function loadRoutes() {
             tr.innerHTML = `
                 <td>${route.route_id}</td>
                 <td>${route.route_name}</td>
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>${route.route_stops}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-route actionBtn"
+                        data-id="${route.route_id}"
+                        data-name="${route.route_name}"
+                        data-stops="${route.route_stops}">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete-route actionBtn" data-id="${route.route_id}">Apagar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-edit-route').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-route-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-route-name').value = this.getAttribute('data-name');
+                document.getElementById('admin-route-stops').value = this.getAttribute('data-stops');
+                const modal = new bootstrap.Modal(document.getElementById('adminRouteModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar rotas.</td></tr>';
@@ -266,7 +261,12 @@ async function loadAdminRequests() {
                 <td>${req.status}</td>
                 <td>${req.response || '—'}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm btn-edit-request" data-id="${req.request_id}" data-status="${req.status}" data-response="${req.response || ''}">Editar</button>
+                    <button class="btn btn-primary btn-sm btn-edit-request"
+                        data-id="${req.request_id}"
+                        data-status="${req.status}"
+                        data-response="${req.response || ''}">
+                        Editar
+                    </button>
                 </td>
             `;
             tbody.appendChild(tr);
