@@ -7,24 +7,39 @@ const User = db.User
 // GET /api/trips
 exports.getAllTrips = async (req, res) => {
   try {
-    // -- If a driver_id is provided, filter trips by that driver
-    const where = {}
-    if (req.query.driver_id) {
-      where.driver_id = req.query.driver_id
+    const { driver_id, route_id, vehicle_plate, alt_trajectory_id } = req.query;
+    const where = {};
+
+    if (driver_id) {
+      where.driver_id = driver_id;
+    }
+    if (route_id) {
+      where.route_id = route_id;
+    }
+
+    const include = [
+      { model: Route, as: 'route' },
+      { model: Vehicle, as: 'vehicle' },
+      { model: User, as: 'driver' },
+      { model: db.AlternativeTrajectory, as: 'alternative_trajectories' }
+    ];
+
+    if (vehicle_plate) {
+      include[1].where = { plate_number: vehicle_plate };
+    }
+
+    if (alt_trajectory_id) {
+      include[3].where = { trajectory_id: alt_trajectory_id };
+      include[3].required = true; 
     }
 
     const trips = await Trip.findAll({
       where,
-      include: [
-        { model: Route, as: 'route' },
-        { model: Vehicle, as: 'vehicle' },
-        { model: User, as: 'driver' },
-        { model: db.AlternativeTrajectory, as: 'alternative_trajectories' }
-      ]
-    })
-    res.json(trips)
+      include
+    });
+    res.json(trips);
   } catch (err) {
-    res.status(500).json({ error: 'Error displaying trips.' })
+    res.status(500).json({ error: 'Error displaying trips.' });
   }
 }
 
@@ -102,7 +117,7 @@ exports.createTrip = async (req, res) => {
     if (!driver) {
       return res.status(404).json({ error: 'Driver not found.' })
     }
-    // Verifica se o usuário é realmente um motorista
+    // Verefies if the user is a driver
     if (!driver.role || driver.role.toLowerCase() !== 'driver') {
       return res.status(400).json({ error: 'Selected user is not a driver.' })
     }

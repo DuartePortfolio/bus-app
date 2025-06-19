@@ -38,6 +38,10 @@
                         <input type="date" name="calendar" id="adminCalendar" class="create-btn">
                     </div>
 
+                    <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterTripsModal">
+                        Filtrar
+                    </button>                    
+
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -136,6 +140,38 @@
                 </form>
               </div>
             </div>
+
+            <div class="modal fade" id="filterTripsModal" tabindex="-1" aria-labelledby="filterTripsModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <form id="filter-trips-form" class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="filterTripsModalLabel">Filtrar Viagens</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="filter-trip-route" class="form-label">ID da Rota</label>
+                      <input type="text" id="filter-trip-route" class="form-control" placeholder="Ex: 2">
+                    </div>
+                    <div class="mb-3">
+                      <label for="filter-trip-vehicle" class="form-label">Matrícula do Veículo</label>
+                      <input type="text" id="filter-trip-vehicle" class="form-control" placeholder="Ex: AA-00-BB">
+                    </div>
+                    <div class="mb-3">
+                      <label for="filter-trip-driver" class="form-label">ID do Condutor</label>
+                      <input type="text" id="filter-trip-driver" class="form-control" placeholder="Ex: 5">
+                    </div>
+                    <div class="mb-3">
+                      <label for="filter-trip-alt" class="form-label">ID Trajeto Alternativo</label>
+                      <input type="text" id="filter-trip-alt" class="form-control" placeholder="Ex: 3">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>            
         </div>
     </main>
 
