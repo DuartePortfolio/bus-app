@@ -1,8 +1,23 @@
+function getUserIdFromToken() {
+    const token = localStorage.getItem('token')
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1]))
+        return payload.user_id
+    } catch {
+        return null
+    }
+}
+
 async function loadCondutorTrips(driverId) {
     const tbody = document.getElementById('condutor-trips-tbody');
     tbody.innerHTML = '<tr><td colspan="7">A carregar...</td></tr>';
     try {
-        const res = await fetch(`http://localhost:3000/api/trips?driver_id=${driverId}`);
+        const res = await fetch(`http://localhost:3000/api/trips?driver_id=${driverId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }); 
+        
         const trips = await res.json();
         tbody.innerHTML = '';
         trips.forEach(trip => {
@@ -25,7 +40,11 @@ async function loadCondutorAltTrips(driverId) {
     const tbody = document.getElementById('condutor-alttrajectories-tbody');
     tbody.innerHTML = '<tr><td colspan="7">A carregar...</td></tr>';
     try {
-        const res = await fetch(`http://localhost:3000/api/trips?driver_id=${driverId}`);
+        const res = await fetch(`http://localhost:3000/api/trips?driver_id=${driverId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }); 
         const trips = await res.json();
         tbody.innerHTML = '';
         let found = false;
@@ -61,8 +80,10 @@ async function loadCondutorRequests() {
     try {
         const token = localStorage.getItem('token');
         const res = await fetch('http://localhost:3000/api/requests', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }); 
         const requests = await res.json();
         tbody.innerHTML = '';
         if (!Array.isArray(requests) || requests.length === 0) {
@@ -113,7 +134,15 @@ async function loadCondutorRequests() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const driverId = getUserIdFromToken()
+    if (!driverId) {
+        alert('Session expired. Please log in again.')
+        window.location.href = 'login.html'
+        return
+    }
     loadCondutorRequests();
+    loadCondutorTrips(driverId)
+    loadCondutorAltTrips(driverId);
 
     const btnCreate = document.getElementById('btn-create-request');
     const requestModal = new bootstrap.Modal(document.getElementById('requestModal'));
