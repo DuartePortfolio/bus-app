@@ -1,9 +1,16 @@
-async function loadTrips() {
+async function loadTrips(filters = {}) {
     const tbody = document.getElementById('trips-tbody');
     tbody.innerHTML = '<tr><td colspan="7">A carregar...</td></tr>';
     try {
+        let url = 'http://localhost:3000/api/trips';
+        const params = new URLSearchParams();
+        if (filters.route_id) params.append('route_id', filters.route_id);
+        if (filters.vehicle_plate) params.append('vehicle_plate', filters.vehicle_plate);
+        if (filters.driver_id) params.append('driver_id', filters.driver_id);
+        if (filters.alt_trajectory_id) params.append('alt_trajectory_id', filters.alt_trajectory_id);
+        if ([...params].length) url += '?' + params.toString();
 
-        const res = await fetch('http://localhost:3000/api/trips', {
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -245,9 +252,10 @@ async function loadAdminRequests() {
     const tbody = document.getElementById('admin-requests-tbody');
     tbody.innerHTML = '<tr><td colspan="8">A carregar...</td></tr>';
     try {
-        const token = localStorage.getItem('token');
         const res = await fetch('http://localhost:3000/api/requests', {
-            headers: { 'Authorization': `Bearer ${token}` }
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         });
         const requests = await res.json();
         tbody.innerHTML = '';
@@ -287,8 +295,7 @@ async function loadAdminRequests() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadAdminRequests();
+
 
     document.getElementById('admin-request-form').addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -316,8 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Internal server error');
         }
     });
-});
-
+    
 // Add object event listener
 const addTripForm = document.querySelector('.viagem-form');
 const addRouteForm = document.querySelector('.rota-form');
@@ -549,4 +555,5 @@ window.addEventListener('DOMContentLoaded', () => {
     loadAltTrajectories();
     loadWeather();
     loadUsers();
+    loadAdminRequests();
 });
