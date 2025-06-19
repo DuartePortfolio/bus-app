@@ -77,6 +77,64 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="section-row">
+                <div class="section-header">
+                    <h3>Pedidos</h3>
+                    <button id="btn-create-request" class="create-btn">Novo Pedido</button>
+                </div>
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Categoria</th>
+                            <th>Título</th>
+                            <th>Mensagem</th>
+                            <th>Estado</th>
+                            <th>Resposta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="condutor-requests-tbody">
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Modal for creating a request -->
+            <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <form id="request-form" class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="requestModalLabel">Novo Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="request-category" class="form-label">Categoria</label>
+                      <select id="request-category" class="form-select" required>
+                        <option value="">Escolher...</option>
+                        <option value="time_off">Folga</option>
+                        <option value="meeting">Reunião</option>
+                        <option value="feature">Sugestão</option>
+                        <option value="route_change">Alteração de Rota</option>
+                        <option value="other">Outro</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="request-title" class="form-label">Título</label>
+                      <input type="text" id="request-title" class="form-control" maxlength="100" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="request-message" class="form-label">Mensagem</label>
+                      <textarea id="request-message" class="form-control" rows="3" required></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
         </div>
     </main>
 

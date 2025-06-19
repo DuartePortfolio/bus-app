@@ -54,3 +54,98 @@ async function loadCondutorAltTrips(driverId) {
         tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar trajetos alternativos.</td></tr>';
     }
 }
+
+async function loadCondutorRequests() {
+    const tbody = document.getElementById('condutor-requests-tbody');
+    tbody.innerHTML = '<tr><td colspan="6">A carregar...</td></tr>';
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3000/api/requests', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const requests = await res.json();
+        tbody.innerHTML = '';
+        if (!Array.isArray(requests) || requests.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6">Sem pedidos.</td></tr>';
+            return;
+        }
+        requests.forEach(req => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${req.request_id}</td>
+                <td>${req.category}</td>
+                <td>${req.title}</td>
+                <td>${req.message}</td>
+                <td>${req.status}</td>
+                <td>${req.response || '—'}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm btn-delete-request" data-id="${req.request_id}">Apagar</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-delete-request').forEach(btn => {
+            btn.addEventListener('click', async function () {
+                if (!confirm('Are you sure you want to delete this request?')) return;
+                const id = this.getAttribute('data-id');
+                const token = localStorage.getItem('token');
+                try {
+                    const res = await fetch(`http://localhost:3000/api/requests/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (res.ok) {
+                        loadCondutorRequests();
+                    } else {
+                        const error = await res.json();
+                        alert(error.error || 'Error deleting request');
+                    }
+                } catch (err) {
+                    alert('Internal server error');
+                }
+            });
+        });
+
+    } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar pedidos.</td></tr>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadCondutorRequests();
+
+    const btnCreate = document.getElementById('btn-create-request');
+    const requestModal = new bootstrap.Modal(document.getElementById('requestModal'));
+    btnCreate.addEventListener('click', () => {
+        document.getElementById('request-form').reset();
+        requestModal.show();
+    });
+
+    document.getElementById('request-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const category = document.getElementById('request-category').value;
+        const title = document.getElementById('request-title').value;
+        const message = document.getElementById('request-message').value;
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch('http://localhost:3000/api/requests', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ category, title, message })
+            });
+            if (res.ok) {
+                requestModal.hide();
+                loadCondutorRequests();
+            } else {
+                const error = await res.json();
+                alert(error.error || 'Erro ao enviar pedido.');
+            }
+        } catch (err) {
+            alert('Erro ao comunicar com o servidor.');
+        }
+    });
+});
