@@ -135,7 +135,7 @@ async function loadStops() {
                         data-latitude="${stop.stop_name}">
                         Editar
                     </button>
-                    <button class="btn btn-danger btn-sm btn-delete-route stop" data-id="${stop.stop_id}">Apagar</button>
+                    <button class="btn btn-danger btn-sm btn-delete-stop actionBtn" data-id="${stop.stop_id}">Apagar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -173,9 +173,27 @@ async function loadVehicles() {
                 <td>${vehicle.vehicle_id}</td>
                 <td>${vehicle.plate_number}</td>
                 <td>${vehicle.capacity}</td>
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-vehicle actionBtn"
+                        data-id="${vehicle.vehicle_id}"
+                        data-plate="${vehicle.plate_number}"
+                        data-capacity="${vehicle.capacity}">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete-vehicle actionBtn" data-id="${stop.stop_id}">Apagar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-edit-vehicle').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-vehicle-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-vehicle-plate').value = this.getAttribute('data-plate');
+                document.getElementById('admin-vehicle-capacity').value = this.getAttribute('data-capacity');
+                const modal = new bootstrap.Modal(document.getElementById('adminVehicleModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar veículos.</td></tr>';
@@ -200,9 +218,29 @@ async function loadAltTrajectories() {
                 <td>${trajectory.stop_id_1}</td>
                 <td>${trajectory.stop_id_2}</td>
                 <td>${trajectory.alt_trajectory}</td>
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-altTraj actionBtn"
+                        data-id="${trajectory.alt_trajectory_id}"
+                        data-stop1="${trajectory.stop_id_1}"
+                        data-stop2="${trajectory.stop_id_2}"
+                        data-name="${trajectory.alt_trajectory}">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete-altTraj actionBtn" data-id="${trajectory.alt_trajectory_id}">Apagar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-edit-altTraj').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-altTraj-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-altTraj-stop1').value = this.getAttribute('data-stop1');
+                document.getElementById('admin-altTraj-stop2').value = this.getAttribute('data-stop2');
+                document.getElementById('admin-altTraj-name').value = this.getAttribute('data-name');
+                const modal = new bootstrap.Modal(document.getElementById('adminAltTrajModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar trajetos alternativos.</td></tr>';
@@ -230,9 +268,35 @@ async function loadWeather() {
                 <td>${reading.wind}</td>
                 <td>${reading.location}</td>
                 <td>${reading.notes}</td>                
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-weather actionBtn"
+                        data-id="${reading.reading_id}"
+                        data-datetime="${reading.datetime}"
+                        data-temperature="${reading.temperature}"
+                        data-rain="${reading.rain}"
+                        data-wind="${reading.wind}"
+                        data-location="${reading.location}"
+                        data-notes="${reading.notes}">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete-weather actionBtn" data-id="${reading.reading_id}">Apagar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-edit-weather').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-weather-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-weather-datetime').value = this.getAttribute('data-datetime');
+                document.getElementById('admin-weather-temperature').value = this.getAttribute('data-temperature');
+                document.getElementById('admin-weather-rain').value = this.getAttribute('data-rain');
+                document.getElementById('admin-weather-wind').value = this.getAttribute('data-wind');
+                document.getElementById('admin-weather-location').value = this.getAttribute('data-location');
+                document.getElementById('admin-weather-notes').value = this.getAttribute('data-notes');
+                const modal = new bootstrap.Modal(document.getElementById('adminWeatherModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="8">Erro ao carregar meteorologia.</td></tr>';
@@ -258,9 +322,31 @@ async function loadUsers() {
                 <td>${user.email}</td>
                 <td>${user.role}</td>
                 <td>${user.contact}</td>
-                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-request"
+                        data-id="${user.user_id}"
+                        data-name="${user.name}"
+                        data-email="${user.email}"
+                        data-role="${user.role}"
+                        data-contact="${user.contact}">
+                        Editar
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-delete-weather actionBtn" data-id="${user.user_id}">Apagar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        tbody.querySelectorAll('.btn-edit-request').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-user-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-user-name').value = this.getAttribute('data-name');
+                document.getElementById('admin-user-email').value = this.getAttribute('data-email');
+                document.getElementById('admin-user-role').value = this.getAttribute('data-role');
+                document.getElementById('admin-user-contact').value = this.getAttribute('data-contact');
+                const modal = new bootstrap.Modal(document.getElementById('adminUserModal'));
+                modal.show();
+            });
         });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar veículos.</td></tr>';
@@ -293,12 +379,13 @@ async function loadAdminRequests() {
                 <td>${req.status}</td>
                 <td>${req.response || '—'}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm btn-edit-request"
+                    <button class="btn btn-primary btn-sm btn-edit-request actionBtn"
                         data-id="${req.request_id}"
                         data-status="${req.status}"
                         data-response="${req.response || ''}">
                         Editar
                     </button>
+                    <button class="btn btn-danger btn-sm btn-delete-request actionBtn" data-id="${req.request_id}">Apagar</button>
                 </td>
             `;
             tbody.appendChild(tr);

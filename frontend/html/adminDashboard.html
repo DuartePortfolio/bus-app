@@ -49,7 +49,7 @@
                             <input type="date" name="calendar" id="adminCalendar" class="create-btn">
 
                             <!-- Adicionar Viagem Modal -->
-                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarViagem">
+                            <button type="button" class="create-btn" N-bs-toggle="modal" data-bs-target="#modalAdicionarViagem">
                                 Adicionar Viagem
                             </button>
                             <div class="modal fade" id="modalAdicionarViagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -256,28 +256,11 @@
                                 <th>ID</th>
                                 <th>Matrícula</th>
                                 <th>Capacidade</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="vehicles-tbody">
-                            <tr>
-                                <td>3</td>
-                                <td>PT-1234</td>
-                                <td>50</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>FE-4434</td>
-                                <td>65</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>TS-PMO</td>
-                                <td>100</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -328,31 +311,11 @@
                                 <th>Stop Id 1</th>
                                 <th>Stop Id 2</th>
                                 <th>Trajetoria</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="alternative-trajectories-tbody">
-                            <tr>
-                                <td>137</td>
-                                <td>2</td>
-                                <td>8</td>
-                                <td>Desvio pela Rua dos Murças.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>276</td>
-                                <td>10</td>
-                                <td>17</td>
-                                <td>Percurso alternativo pela Avenida do Mar.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>276</td>
-                                <td>10</td>
-                                <td>17</td>
-                                <td>Rota de emergência via Estrada Monumental.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -418,7 +381,7 @@
                                 <th>Vento</th>
                                 <th>Localização</th>
                                 <th>Notas</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="weather-tbody">
@@ -483,7 +446,7 @@
                                 <th>Email</th>
                                 <th>Cargo</th>
                                 <th>Contacto</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="users-tbody">
@@ -515,14 +478,9 @@
                     </table>
                 </div>
                 
-                <div class="section-row">
-                    <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#adminRequestModal">
-                        Pedidos
-                    </button>
-
-                    <div class="modal fade" id="adminRequestModal" tabindex="-1" aria-labelledby="adminRequestModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <form id="admin-request-form" class="modal-content">
+                <div class="modal fade" id="adminRequestModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <form id="admin-request-form" class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="adminRequestModalLabel">Atualizar Pedido</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -530,24 +488,23 @@
                             <div class="modal-body">
                                 <input type="hidden" id="admin-request-id">
                                 <div class="mb-3">
-                                <label for="admin-request-status" class="form-label">Estado</label>
-                                <select id="admin-request-status" class="form-select" required>
-                                    <option value="pending">Pendente</option>
-                                    <option value="accepted">Aceite</option>
-                                    <option value="denied">Recusado</option>
-                                    <option value="on_hold">Em espera</option>
-                                </select>
+                                    <label for="admin-request-status" class="form-label">Estado</label>
+                                    <select id="admin-request-status" class="form-select" required>
+                                        <option value="pending">Pendente</option>
+                                        <option value="accepted">Aceite</option>
+                                        <option value="denied">Recusado</option>
+                                        <option value="on_hold">Em espera</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                <label for="admin-request-response" class="form-label">Resposta</label>
-                                <textarea id="admin-request-response" class="form-control" rows="3"></textarea>
+                                    <label for="admin-request-response" class="form-label">Resposta</label>
+                                    <textarea id="admin-request-response" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -653,26 +610,22 @@
     </div>
 
     <!-- Modal de Editar Veículos -->
-    <div class="modal fade" id="adminStopModal" tabindex="-1" aria-labelledby="adminStopModalLabel" aria-hidden="true">
+    <div class="modal fade" id="adminVehicleModal" tabindex="-1" aria-labelledby="adminVehicleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <form id="admin-stop-form" class="modal-content">
+            <form id="admin-vehicle-form" class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="adminStopModalLabel">Atualizar Rota</h5>
+                    <h5 class="modal-title" id="adminVehicleModalLabel">Atualizar Rota</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input id="admin-stop-id" type="hidden">
+                    <input id="admin-vehicle-id" type="hidden">
                     <div class="form-group mb-3">
-                        <label for="admin-stop-latitude">Latitude</label>
-                        <input id="admin-stop-latitude" type="text" class="form-control" placeholder="Latitude">
+                        <label for="admin-vehicle-plate">Matrícula</label>
+                        <input id="admin-vehicle-plate" type="text" class="form-control" placeholder="Matrícula">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="admin-stop-longitude">Longitude</label>
-                        <input id="admin-stop-longitude" type="text" class="form-control" placeholder="Longitude">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="admin-stop-name">Nome</label>
-                        <input id="admin-stop-name" type="text" class="form-control" placeholder="Nome">
+                        <label for="admin-vehicle-capacity">Capacidade</label>
+                        <input id="admin-vehicle-capacity" type="text" class="form-control" placeholder="Capacidade">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -681,5 +634,112 @@
             </form>
         </div>
     </div>
+
+    <!-- Modal de Editar Trajeto Alternativos -->
+    <div class="modal fade" id="adminAltTrajModal" tabindex="-1" aria-labelledby="adminAltTrajModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-altTraj-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminAltTrajModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-altTraj-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-altTraj-stop1">Paragem 1</label>
+                        <input id="admin-altTraj-stop1" type="text" class="form-control" placeholder="Paragem 1">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-altTraj-stop2">Paragem 2</label>
+                        <input id="admin-altTraj-stop2" type="text" class="form-control" placeholder="Paragem 2">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-altTraj-name">Descrição</label>
+                        <input id="admin-altTraj-name" type="text" class="form-control" placeholder="Descrição">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Trajeto Alternativos -->
+    <div class="modal fade" id="adminWeatherModal" tabindex="-1" aria-labelledby="adminWeatherModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-weather-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminWeatherModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-weather-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-datetime">Data</label>
+                        <input id="admin-weather-datetime" type="text" class="form-control" placeholder="Data">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-temperature">Temperatura</label>
+                        <input id="admin-weather-temperature" type="text" class="form-control" placeholder="Temperatura">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-rain">Chuva</label>
+                        <input id="admin-weather-rain" type="text" class="form-control" placeholder="Chuva">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-wind">Vento</label>
+                        <input id="admin-weather-wind" type="text" class="form-control" placeholder="Vento">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-location">Localização</label>
+                        <input id="admin-weather-location" type="text" class="form-control" placeholder="Localização">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-notes">Notas</label>
+                        <input id="admin-weather-notes" type="text" class="form-control" placeholder="Notas">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Utilizador -->
+    <div class="modal fade" id="adminUserModal" tabindex="-1" aria-labelledby="adminUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-user-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminUserModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-user-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-user-name">Nome</label>
+                        <input id="admin-user-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-user-email">Email</label>
+                        <input id="admin-user-email" type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-user-role">Cargo</label>
+                        <input id="admin-user-role" type="text" class="form-control" placeholder="Cargo">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-user-contact">Contacto</label>
+                        <input id="admin-user-contact" type="text" class="form-control" placeholder="Contacto">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
