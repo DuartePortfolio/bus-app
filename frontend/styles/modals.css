@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+.modal-dialog {
+  width: 500px
+}
+
 .modal-content {
   margin: 20px
 }
