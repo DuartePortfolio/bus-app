@@ -31,5 +31,17 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
+  User.associate = (models) => {
+    User.hasMany(models.Request, {
+      foreignKey: 'driver_id',
+      as: 'requestsAsDriver',
+    });
+
+    User.hasMany(models.Request, {
+      foreignKey: 'operator_id',
+      as: 'requestsAsOperator',
+    });
+  };
+
   return User;
 };

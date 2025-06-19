@@ -538,9 +538,63 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="section-row">
+                    <div class="section-header">
+                        <h3>Pedidos dos Condutores</h3>
+                    </div>
+                    <table class="main-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Condutor</th>
+                                <th>Categoria</th>
+                                <th>Título</th>
+                                <th>Mensagem</th>
+                                <th>Estado</th>
+                                <th>Resposta</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-requests-tbody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Modal for updating request -->
+             
             </div>
         </div>
     </main>
+                <div class="modal fade" id="adminRequestModal" tabindex="-1" aria-labelledby="adminRequestModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <form id="admin-request-form" class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="adminRequestModalLabel">Atualizar Pedido</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                      </div>
+                      <div class="modal-body">
+                        <input type="hidden" id="admin-request-id">
+                        <div class="mb-3">
+                          <label for="admin-request-status" class="form-label">Estado</label>
+                          <select id="admin-request-status" class="form-select" required>
+                            <option value="pending">Pendente</option>
+                            <option value="accepted">Aceite</option>
+                            <option value="denied">Recusado</option>
+                            <option value="on_hold">Em espera</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="admin-request-response" class="form-label">Resposta</label>
+                          <textarea id="admin-request-response" class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>  
     <script src="../js/loadDashboard.js"></script>
 </body>
 </html>

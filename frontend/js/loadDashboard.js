@@ -241,6 +241,83 @@ async function loadUsers() {
     }
 }
 
+async function loadAdminRequests() {
+    const tbody = document.getElementById('admin-requests-tbody');
+    tbody.innerHTML = '<tr><td colspan="8">A carregar...</td></tr>';
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:3000/api/requests', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const requests = await res.json();
+        tbody.innerHTML = '';
+        if (!Array.isArray(requests) || requests.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8">Sem pedidos.</td></tr>';
+            return;
+        }
+        requests.forEach(req => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${req.request_id}</td>
+                <td>${req.driver?.name || req.driver_id}</td>
+                <td>${req.category}</td>
+                <td>${req.title}</td>
+                <td>${req.message}</td>
+                <td>${req.status}</td>
+                <td>${req.response || '—'}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm btn-edit-request" data-id="${req.request_id}" data-status="${req.status}" data-response="${req.response || ''}">Editar</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Add event listeners for edit buttons
+        tbody.querySelectorAll('.btn-edit-request').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.getElementById('admin-request-id').value = this.getAttribute('data-id');
+                document.getElementById('admin-request-status').value = this.getAttribute('data-status');
+                document.getElementById('admin-request-response').value = this.getAttribute('data-response');
+                const modal = new bootstrap.Modal(document.getElementById('adminRequestModal'));
+                modal.show();
+            });
+        });
+    } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="8">Erro ao carregar pedidos.</td></tr>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadAdminRequests();
+
+    document.getElementById('admin-request-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const id = document.getElementById('admin-request-id').value;
+        const status = document.getElementById('admin-request-status').value;
+        const response = document.getElementById('admin-request-response').value;
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch(`http://localhost:3000/api/requests/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ status, response })
+            });
+            if (res.ok) {
+                bootstrap.Modal.getInstance(document.getElementById('adminRequestModal')).hide();
+                loadAdminRequests();
+            } else {
+                const error = await res.json();
+                alert(error.error || 'Error updating request');
+            }
+        } catch (err) {
+            alert('Internal server error');
+        }
+    });
+});
+
 // Add object event listener
 const addTripForm = document.querySelector('.viagem-form');
 const addRouteForm = document.querySelector('.rota-form');
