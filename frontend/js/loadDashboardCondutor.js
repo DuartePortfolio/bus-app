@@ -8,16 +8,24 @@ function getUserIdFromToken() {
     }
 }
 
-async function loadCondutorTrips(driverId) {
+async function loadCondutorTrips(filters = {}) {
     const tbody = document.getElementById('condutor-trips-tbody');
     tbody.innerHTML = '<tr><td colspan="7">A carregar...</td></tr>';
     try {
-        const res = await fetch(`http://localhost:3000/api/trips?driver_id=${driverId}`, {
+        let url = 'http://localhost:3000/api/trips';
+        const params = new URLSearchParams();
+        if (filters.driver_id) params.append('driver_id', filters.driver_id);
+        if (filters.route_name) params.append('route_name', filters.route_name);
+        if (filters.vehicle_plate) params.append('vehicle_plate', filters.vehicle_plate);
+        if (filters.alt_trajectory_text) params.append('alt_trajectory_text', filters.alt_trajectory_text);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
-        }); 
-        
+        });
+
         const trips = await res.json();
         tbody.innerHTML = '';
         trips.forEach(trip => {
@@ -55,9 +63,9 @@ async function loadCondutorAltTrips(driverId) {
                     tr.innerHTML = `
                         <td>${trajectory.alt_trajectory_id}</td>
                         <td></td>
-                        <td>${trajectory.stop_id_1?.stop_name}</td>
+                        <td>${trajectory.stop1?.stop_name || trajectory.stop_id_1 || '—'}</td>
                         <td></td>
-                        <td>${trajectory.stop_id_2?.stop_name}</td>
+                        <td>${trajectory.stop2?.stop_name || trajectory.stop_id_2 || '—'}</td>
                         <td></td>
                         <td>${trajectory.alt_trajectory}</td>
                     `;
@@ -140,9 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'login.html'
         return
     }
-    loadCondutorRequests();
-    loadCondutorTrips(driverId)
-    loadCondutorAltTrips(driverId);
+
 
     const btnCreate = document.getElementById('btn-create-request');
     const requestModal = new bootstrap.Modal(document.getElementById('requestModal'));
@@ -151,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestModal.show();
     });
 
+    // Submit request form
     document.getElementById('request-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const category = document.getElementById('request-category').value;
@@ -177,4 +184,28 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Erro ao comunicar com o servidor.');
         }
     });
+
+    // Filter modal logic for trips
+    const filterTripsForm = document.getElementById('filter-trips-form');
+    if (filterTripsForm) {
+        filterTripsForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const filters = {
+                driver_id: driverId,
+                route_name: document.getElementById('filter-trip-route-name').value,
+                vehicle_plate: document.getElementById('filter-trip-vehicle-plate').value,
+                alt_trajectory_text: document.getElementById('filter-trip-alt-text').value
+            };
+            // Remove empty filters
+            Object.keys(filters).forEach(key => {
+                if (!filters[key]) delete filters[key];
+            });
+            bootstrap.Modal.getInstance(document.getElementById('filterTripsModal')).hide();
+            loadCondutorTrips(filters);
+        });
+    }    
+
+    loadCondutorRequests();
+    loadCondutorTrips({ driver_id: driverId })
+    loadCondutorAltTrips(driverId);
 });

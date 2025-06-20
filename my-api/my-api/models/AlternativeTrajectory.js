@@ -29,6 +29,15 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'trip_id',
       as: 'trips'
     });
+
+    AlternativeTrajectory.belongsTo(models.Stop, {
+      foreignKey: 'stop_id_1',
+      as: 'stop1'
+    });
+    AlternativeTrajectory.belongsTo(models.Stop, {
+      foreignKey: 'stop_id_2',
+      as: 'stop2'
+    });    
   };
 
   return AlternativeTrajectory;
