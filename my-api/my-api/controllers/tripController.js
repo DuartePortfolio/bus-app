@@ -1,4 +1,5 @@
 const db = require('../models')
+const { Op } = require('sequelize');
 const Trip = db.Trip
 const Route = db.Route
 const Vehicle = db.Vehicle
@@ -7,31 +8,59 @@ const User = db.User
 // GET /api/trips
 exports.getAllTrips = async (req, res) => {
   try {
-    const { driver_id, route_id, vehicle_plate, alt_trajectory_id } = req.query;
-    const where = {};
+    const { driver_id, route_id, vehicle_id, alt_trajectory_id, driver_name, vehicle_plate, route_name, alt_trajectory_text} = req.query;
 
-    if (driver_id) {
-      where.driver_id = driver_id;
-    }
-    if (route_id) {
-      where.route_id = route_id;
-    }
+    const where = {};
+    if (driver_id) where.driver_id = driver_id;
+    if (route_id) where.route_id = route_id;
+    if (vehicle_id) where.vehicle_id = vehicle_id;
 
     const include = [
       { model: Route, as: 'route' },
       { model: Vehicle, as: 'vehicle' },
       { model: User, as: 'driver' },
-      { model: db.AlternativeTrajectory, as: 'alternative_trajectories' }
+      { 
+        model: db.AlternativeTrajectory, 
+        as: 'alternative_trajectories',
+        include: [
+          { model: db.Stop, as: 'stop1' },
+          { model: db.Stop, as: 'stop2' }
+        ]
+      }
     ];
 
-    if (vehicle_plate) {
-      include[1].where = { plate_number: vehicle_plate };
+    // Filter by driver name
+    if (driver_name) {
+      include[2].where = { name: { [Op.like]: `%${driver_name}%` } };
+      include[2].required = true;
     }
 
-    if (alt_trajectory_id) {
-      include[3].where = { trajectory_id: alt_trajectory_id };
-      include[3].required = true; 
+    // Filter by vehicle plate
+    if (vehicle_plate) {
+      include[1].where = { plate_number: { [Op.like]: `%${vehicle_plate}%` } };
+      include[1].required = true;
     }
+
+    // Filter by alt trajectory text
+    if (alt_trajectory_text) {
+      include[3].where = { alt_trajectory: { [Op.like]: `%${alt_trajectory_text}%` } };
+      include[3].required = true;
+    }
+
+    // Filter by alt trajectory id
+    if (alt_trajectory_id) {
+      include[3].where = {
+        ...(include[3].where || {}),
+        trajectory_id: alt_trajectory_id
+      };
+      include[3].required = true;
+    }
+
+    // Filter by route name
+    if (req.query.route_name) {
+      include[0].where = { route_name: { [Op.like]: `%${req.query.route_name}%` } };
+      include[0].required = true;
+    }    
 
     const trips = await Trip.findAll({
       where,
@@ -55,7 +84,14 @@ exports.getTripById = async (req, res) => {
         { model: Route, as: 'route' },
         { model: Vehicle, as: 'vehicle' },
         { model: User, as: 'driver' },
-        { model: db.AlternativeTrajectory, as: 'alternative_trajectories' }
+        { 
+          model: db.AlternativeTrajectory, 
+          as: 'alternative_trajectories',
+          include: [
+            { model: db.Stop, as: 'stop1' },
+            { model: db.Stop, as: 'stop2' }
+          ]
+        }
       ]
     })
     if (!trip) return res.status(404).json({ error: 'Trip not found.' })
@@ -77,6 +113,8 @@ exports.createTrip = async (req, res) => {
     const vehicle_id = Number(req.body.vehicle_id)
     const driver_id = Number(req.body.driver_id)
     const start_time = req.body.start_time
+    const alt_trajectory_id = req.body.trajectory_id || req.body.alt_trajectory_id
+
 
     // Check for missing fields
     const missingFields = []
@@ -123,6 +161,15 @@ exports.createTrip = async (req, res) => {
     }
 
     const newTrip = await Trip.create({ route_id, vehicle_id, driver_id, start_time })
+
+    if (alt_trajectory_id) {
+      const altTraj = await db.AlternativeTrajectory.findByPk(alt_trajectory_id)
+      if (!altTraj) {
+        return res.status(404).json({ error: 'Alternative trajectory not found.' })
+      }
+      await newTrip.addAlternative_trajectory(altTraj)
+    }    
+
     res.status(201).json(newTrip)
   } catch (err) {
     res.status(500).json({ error: 'Error creating trip.' })

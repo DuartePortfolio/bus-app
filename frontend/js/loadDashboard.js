@@ -35,9 +35,9 @@ async function loadTrips(filters = {}) {
                     <button class="btn btn-primary btn-sm btn-edit-trip actionBtn"
                         data-id="${trip.trip_id}"
                         data-time="${trip.start_time}"
-                        data-route="${trip.route?.route_name || trip.route_id}"
-                        data-vehicle="${trip.vehicle?.plate_number || trip.vehicle_id}"
-                        data-driver="${trip.driver?.name || trip.driver_id}"
+                        data-route="${trip.route_id}"
+                        data-vehicle="${trip.vehicle_id}"
+                        data-driver="${trip.driver_id}"
                         data-alttraj="${altTraj}">
                         Editar
                     </button>
