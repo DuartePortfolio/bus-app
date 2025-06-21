@@ -1,5 +1,5 @@
 const addTripForm = document.querySelector('.viagem-form');
-const addRouteForm = document.querySelector('.rota-form');
+// const addRouteForm = document.querySelector('.rota-form');
 const addStopForm = document.querySelector('.paragem-form');
 const addVehicleForm = document.querySelector('.veiculo-form');
 const addAltTrajectoryForm = document.querySelector('.trajetoria-alternativa-form');
@@ -490,7 +490,7 @@ addTripForm.addEventListener('submit', async (e) => {
 });
 
 // add route form event listener
-addRouteForm.addEventListener('submit', async (e) => {
+/* addRouteForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addRouteForm);
     const data = {
@@ -516,7 +516,7 @@ addRouteForm.addEventListener('submit', async (e) => {
     } catch (err) {
         alert('Internal server error');
     }
-});
+}); */
 
 // add stop form event listener
 addStopForm.addEventListener('submit', async (e) => {
