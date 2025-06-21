@@ -943,7 +943,7 @@ async function loadUserName() {
     }
 }
 
-async function handleDelete(url, reloadFn, id) {
+async function handleDelete(url, reloadFn) {
     if (confirm('Tem a certeza que deseja apagar este registo?')) {
         try {
             const res = await fetch(url, {
