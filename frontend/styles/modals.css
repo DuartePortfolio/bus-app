@@ -8,12 +8,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
-  --bs-modal-width: au;
+  --bs-modal-width: auto;
 
 }
 
 .modal-dialog {
-  width: 500px
+  width: 90vw;
+  max-width: 700px;
 }
 
 .modal-content {
@@ -188,3 +189,4 @@ button:hover {
     80%  { transform: scale(1.08) translateY(-4px);}
     100% { transform: scale(1) translateY(0);}
 }
+
