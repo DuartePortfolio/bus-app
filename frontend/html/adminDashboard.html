@@ -190,9 +190,24 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="mb-3">
-                                        <label for="filter-route-route-name" class="form-label">Nome da Rota</label>
-                                        <input type="text" id="filter-route-route-name" class="form-control" placeholder="Ex: Linha Azul">
+                                        <div class="main-content">
+                                            <div class="route-creation">
+                                                <input type="text" id="route-name" placeholder="Route name">
+                                                <button id="create-route">Create Route</button>
+                                            </div>
+                                            <div class="route-area">
+                                                <h2 id="route-title">No route created</h2>
+                                                <div id="route-drop-area" class="drop-area">
+                                                    <p>Drag bus stops here to build your route</p>
+                                                </div>
+                                            </div>
+                                            <div class="bus-stops-drawer">
+                                                <h2>Available Bus Stops</h2>
+                                                <div id="bus-stops-list"></div>
+                                                <!-- <input type="text" id="new-stop-name" placeholder="New bus stop name">
+                                                <button id="add-stop">Add Bus Stop</button> -->
+                                            </div>
+                                            <script src="../js/modelCreateRoute.js"></script>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
