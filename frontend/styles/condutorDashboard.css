@@ -131,3 +131,12 @@ h2, h3 {
 .text {
   color: var(--text-sec)
 }
+
+#logo-img {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

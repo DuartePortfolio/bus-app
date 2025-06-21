@@ -105,3 +105,12 @@ main {
   align-self: center;
   transition: background 0.2s;
 }
+
+#logo-img {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

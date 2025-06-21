@@ -98,3 +98,12 @@ label {
   font-weight: 700;
   letter-spacing: 1px;
 }
+
+#logo-img {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
