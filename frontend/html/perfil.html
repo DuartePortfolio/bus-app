@@ -34,8 +34,8 @@
                         <div class="profile-header">
                             <img src="" alt="Foto de perfil" class="profile-img">
                             <div class="profile-info">
-                                <div class="profile-name">Teste da Silva</div>
-                                <div class="profile-role">Administrador</div>
+                                <div class="profile-name" id="profile-name"></div>
+                                <div class="profile-role" id="profile-role"></div>
                             </div>
                             <button class="create-btn">Alterar Foto de Perfil</button>
                         </div>
@@ -84,23 +84,23 @@
                         <div class="profile-row">
                             <div>
                                 <div class="label">Nome</div>
-                                <div class="value">Teste</div>
+                                <div class="value" id="nome"></div>
                             </div>
                             <div>
                                 <div class="label">Sobrenome</div>
-                                <div class="value">da Silva</div>
+                                <div class="value" id="sobrenome"></div>
                             </div>
                         </div>
                         <div class="profile-row">
                             <div>
                                 <div class="label">Endereço Email</div>
-                                <div class="value">teste@gmail.com</div>
+                                <div class="value" id="email"></div>
                             </div>
                         </div>
                         <div class="profile-row">
                             <div>
                                 <div class="label">Cargo</div>
-                                <div class="value">Administrador</div>
+                                <div class="value" id="cargo"></div>
                             </div>
                         </div>
                     </div>
@@ -108,5 +108,7 @@
             </div>
         </div>
     </main>
+
+    <script src="../js/perfil.js"></script>
 </body>
 </html>

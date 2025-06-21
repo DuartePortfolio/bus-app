@@ -17,6 +17,7 @@ const userRoutes = require('./routes/userRoutes');
 const routeRoutes = require('./routes/routeRoutes');
 const alternativeTrajectoryRoutes = require('./routes/alternativeTrajectoryRoutes');
 const tripRoutes = require('./routes/tripRoutes');
+const requestRoutes = require('./routes/requestRoutes');
 
 
 app.use('/api', vehicleRoutes);
@@ -26,6 +27,7 @@ app.use('/api', userRoutes);
 app.use('/api', routeRoutes);
 app.use('/api', alternativeTrajectoryRoutes);
 app.use('/api', tripRoutes);
+app.use('/api', requestRoutes);
 
 
 

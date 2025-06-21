@@ -27,6 +27,7 @@ db.RouteStop = require('./RouteStop')(sequelize, Sequelize);
 db.AlternativeTrajectory = require('./AlternativeTrajectory')(sequelize, Sequelize);
 db.Trip = require('./Trip')(sequelize, Sequelize);
 db.TripAlternativeTrajectory = require('./TripAlternativeTrajectory')(sequelize, Sequelize);
+db.Request = require('./Request')(sequelize, Sequelize);
 
 // Connect tables that have associations
 Object.values(db).forEach(model => {

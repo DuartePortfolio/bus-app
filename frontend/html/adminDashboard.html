@@ -27,9 +27,20 @@
         <a class="nav-link" href="login.html">Login</a>
     </nav>
     <main>
+        <div class="navigation">
+            <a href="#trips-section">Viagens para Hoje</a>
+            <a href="#routes-section">Rotas</a>
+            <a href="#stops-section">Paragens</a>
+            <a href="#vehicles-section">Veículos</a>
+            <a href="#alternative-trajectories-section">Trajetos Alternativos</a>
+            <a href="#weather-section">Meteorologia</a>
+            <a href="#users-section">Utilizadores</a>
+            <a href="#admin-requests-section">Pedidos dos Condutores</a>
+        </div>
+
         <div class="dashboard-box">
             <div class="dashboard-content">
-                <div class="main-section">
+                <div class="main-section" id="trips-section">
                     <p class="welcome">Bem-vindo, {user}</p>
                     <div class="section-header">
                         <h2>Viagens para hoje</h2>
@@ -37,10 +48,14 @@
                         <div class="buttons">
                             <input type="date" name="calendar" id="adminCalendar" class="create-btn">
 
-                            <!-- Adicionar Viagem Modal -->
+
                             <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarViagem">
                                 Adicionar Viagem
                             </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterTripsModal">
+                                Filtrar Viagens
+                            </button>
+                            <!-- Adicionar Viagem Modal -->
                             <div class="modal fade" id="modalAdicionarViagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -68,7 +83,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="viagem-trajetos">Trajetos Alternativos</label>
-                                                    <input type="text" id="viagem-trajetos" placeholder="ID Trajeto (não obrigatório)" name="alternative_routes">
+                                                    <input type="text" id="viagem-trajetos" placeholder="ID Trajeto (não obrigatório)" name="trajectory_id">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -79,41 +94,100 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Filtrar Viagens Modal -->
+                            <div class="modal fade" id="filterTripsModal" tabindex="-1" aria-labelledby="filterTripsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-trips-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterTripsModalLabel">Filtrar Viagens</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-trip-route-name" class="form-label">Nome da Rota</label>
+                                    <input type="text" id="filter-trip-route-name" class="form-control" placeholder="Ex: Linha Azul">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-trip-vehicle-plate" class="form-label">Matrícula do Veículo</label>
+                                    <input type="text" id="filter-trip-vehicle-plate" class="form-control" placeholder="Ex: AA-00-BB">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-trip-alt-text" class="form-label">Texto do Trajeto Alternativo</label>
+                                    <input type="text" id="filter-trip-alt-text" class="form-control" placeholder="Ex: via centro">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
+                            </div>                            
                         </div>
                     </div>
+                    <!-- Tabela de Viagens -->
                     <table class="main-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Horas</th>
+                                <th>Data e Hora</th>
                                 <th>Rota</th>
                                 <th>Veículo</th>
                                 <th>Condutor</th>
                                 <th>Trajetos Alternativos</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="trips-tbody">
-                            
+
                         </tbody>
                     </table>
-                    </div>
+                    
                 </div>
 
-                <div class="section-row">
+                <div class="section-row" id="routes-section">
                     <div class="section-header">
                         <h3>Rotas</h3>
-                    
-                        <!-- Adicionar Rota Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarRota">
-                            Adicionar Rota
-                        </button>
-                        <div class="modal fade" id="modalAdicionarRota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
+                        <div class="buttons">
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarRota">
+                                Adicionar Rota
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterRoutesModal">
+                                Filtrar Rotas
+                            </button>
+                            <!-- Adicionar Rota Modal -->
+                            <div class="modal fade" id="modalAdicionarRota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Rota</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="rota-form">
+                                                <div class="form-group">
+                                                    <label>Nome</label>
+                                                    <input type="text" placeholder="Nome" name="route_name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Paragens</label>
+                                                    <input type="text" placeholder="Paragens" name="route_name">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Filtrar Rotas Modal -->
+                            <div class="modal fade" id="filterRoutesModal" tabindex="-1" aria-labelledby="filterRoutesModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <form id="filter-routes-form" class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Rota</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="filterRoutesModalLabel">Filtrar Rotas</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="main-content">
@@ -136,10 +210,13 @@
                                             <script src="../js/modelCreateRoute.js"></script>
                                         </div>
                                     </div>
-                                    
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     <table class="main-table">
                         <thead>
@@ -147,33 +224,16 @@
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>Paragens</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="routes-tbody">
-                            <tr>
-                                <td>3</td>
-                                <td>Courelas - Centro</td>
-                                <td><button class="view-btn">Ver paragens</button></td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Centro - Courelas</td>
-                                <td><button class="view-btn">Ver paragens</button></td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Barreiros - Avenida</td>
-                                <td><button class="view-btn">Ver paragens</button></td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="stops-section">
                     <div class="section-header">
                         <h3>Paragens</h3>
 
@@ -219,36 +279,16 @@
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                                 <th>Nome</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="stops-tbody">
-                            <tr>
-                                <td>1147</td>
-                                <td>32.666400000</td>
-                                <td>-16.92450000</td>
-                                <td>Rua 4 Pico Romeiras, D</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>1098</td>
-                                <td>32.666400000</td>
-                                <td>-16.92450000</td>
-                                <td>Rua 4 Pico Romeiras, D</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>1100</td>
-                                <td>32.666400000</td>
-                                <td>-16.92450000</td>
-                                <td>Rua 4 Pico Romeiras, D</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="vehicles-section">
                     <div class="section-header">
                         <h3>Veículos</h3>
 
@@ -289,33 +329,16 @@
                                 <th>ID</th>
                                 <th>Matrícula</th>
                                 <th>Capacidade</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="vehicles-tbody">
-                            <tr>
-                                <td>3</td>
-                                <td>PT-1234</td>
-                                <td>50</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>FE-4434</td>
-                                <td>65</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>TS-PMO</td>
-                                <td>100</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="alternative-trajectories-section">
                     <div class="section-header">
                         <h3>Trajetos Alternativos</h3>
 
@@ -361,36 +384,16 @@
                                 <th>Stop Id 1</th>
                                 <th>Stop Id 2</th>
                                 <th>Trajetoria</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="alternative-trajectories-tbody">
-                            <tr>
-                                <td>137</td>
-                                <td>2</td>
-                                <td>8</td>
-                                <td>Desvio pela Rua dos Murças.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>276</td>
-                                <td>10</td>
-                                <td>17</td>
-                                <td>Percurso alternativo pela Avenida do Mar.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>276</td>
-                                <td>10</td>
-                                <td>17</td>
-                                <td>Rota de emergência via Estrada Monumental.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="weather-section">
                     <div class="section-header">
                         <h3>Meteorologia</h3>
                         
@@ -451,25 +454,16 @@
                                 <th>Vento</th>
                                 <th>Localização</th>
                                 <th>Notas</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="weather-tbody">
-                            <tr>
-                                <td>34</td>
-                                <td>2025-04-03 07:30:00</td>
-                                <td>22.50</td>
-                                <td>0.00</td>
-                                <td>5.20</td>
-                                <td>Praça Povo</td>
-                                <td>Céu limpo durante toda a manhã.</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
                 
-                <div class="section-row">
+                <div class="section-row" id="users-section">
                     <div class="section-header">
                         <h3>Utilizadores</h3>
                         
@@ -525,32 +519,300 @@
                                 <th>Email</th>
                                 <th>Cargo</th>
                                 <th>Contacto</th>
-                                <th></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="users-tbody">
-                            <tr>
-                                <td>4</td>
-                                <td>João Ferreira</td>
-                                <td>jf@gmail.com</td>
-                                <td>Condutor</td>
-                                <td>910102345</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Teste da Silva</td>
-                                <td>teste@gmail.com</td>
-                                <td>Admin</td>
-                                <td>910000123</td>
-                                <td><button class="icon-btn" title="Editar">&#9998;</button></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
+                </div>
+                
+                <div class="section-row" id="admin-requests-section">
+                    <div class="section-header">
+                        <h3>Pedidos dos Condutores</h3>
+                    </div>
+                    <table class="main-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Condutor</th>
+                                <th>Categoria</th>
+                                <th>Título</th>
+                                <th>Mensagem</th>
+                                <th>Estado</th>
+                                <th>Resposta</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-requests-tbody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="modal fade" id="adminRequestModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <form id="admin-request-form" class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="adminRequestModalLabel">Atualizar Pedido</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="admin-request-id">
+                                <div class="mb-3">
+                                    <label for="admin-request-status" class="form-label">Estado</label>
+                                    <select id="admin-request-status" class="form-select" required>
+                                        <option value="pending">Pendente</option>
+                                        <option value="accepted">Aceite</option>
+                                        <option value="denied">Recusado</option>
+                                        <option value="on_hold">Em espera</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="admin-request-response" class="form-label">Resposta</label>
+                                    <textarea id="admin-request-response" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <script src="../js/loadDashboard.js"></script>
+
+
+    <!--------------- MODAIS --------------->
+    
+    <!-- Modal de Editar Viagem -->
+    <div class="modal fade" id="adminTripModal" tabindex="-1" aria-labelledby="adminTripModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-trip-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminTripModalLabel">Atualizar Viagem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-trip-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-trip-time">Data e Hora</label>
+                        <input id="admin-trip-time" type="text" class="form-control" placeholder="Horas">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-trip-route">Rota</label>
+                        <input id="admin-trip-route" type="text" class="form-control" placeholder="Rota">
+                    </div>
+                        <div class="form-group mb-3">
+                        <label for="admin-trip-vehicle">Veículo</label>
+                        <input id="admin-trip-vehicle" type="text" class="form-control" placeholder="Veículo">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-trip-driver">Condutor</label>
+                        <input id="admin-trip-driver" type="text" class="form-control" placeholder="Condutor">
+                    </div>
+                        <div class="form-group mb-3">
+                        <label for="admin-trip-alttraj">Trajetos Alternativos</label>
+                        <input id="admin-trip-alttraj" class="form-control" placeholder="Trajetos"></input>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Rotas -->
+    <div class="modal fade" id="adminRouteModal" tabindex="-1" aria-labelledby="adminRouteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-route-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminRouteModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-route-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-route-name">Nome</label>
+                        <input id="admin-route-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                        <div class="form-group mb-3">
+                        <label for="admin-route-stops">Paragens</label>
+                        <input id="admin-route-stops" type="text" class="form-control" placeholder="Paragens">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Paragens -->
+    <div class="modal fade" id="adminStopModal" tabindex="-1" aria-labelledby="adminStopModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-stop-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminStopModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-stop-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-latitude">Latitude</label>
+                        <input id="admin-stop-latitude" type="text" class="form-control" placeholder="Latitude">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-longitude">Longitude</label>
+                        <input id="admin-stop-longitude" type="text" class="form-control" placeholder="Longitude">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-stop-name">Nome</label>
+                        <input id="admin-stop-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Veículos -->
+    <div class="modal fade" id="adminVehicleModal" tabindex="-1" aria-labelledby="adminVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-vehicle-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminVehicleModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-vehicle-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-vehicle-plate">Matrícula</label>
+                        <input id="admin-vehicle-plate" type="text" class="form-control" placeholder="Matrícula">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-vehicle-capacity">Capacidade</label>
+                        <input id="admin-vehicle-capacity" type="text" class="form-control" placeholder="Capacidade">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Trajeto Alternativos -->
+    <div class="modal fade" id="adminAltTrajModal" tabindex="-1" aria-labelledby="adminAltTrajModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-altTraj-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminAltTrajModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-altTraj-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-altTraj-stop1">Paragem 1</label>
+                        <input id="admin-altTraj-stop1" type="text" class="form-control" placeholder="Paragem 1">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-altTraj-stop2">Paragem 2</label>
+                        <input id="admin-altTraj-stop2" type="text" class="form-control" placeholder="Paragem 2">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-altTraj-name">Descrição</label>
+                        <input id="admin-altTraj-name" type="text" class="form-control" placeholder="Descrição">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Trajeto Alternativos -->
+    <div class="modal fade" id="adminWeatherModal" tabindex="-1" aria-labelledby="adminWeatherModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-weather-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminWeatherModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-weather-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-datetime">Data</label>
+                        <input id="admin-weather-datetime" type="text" class="form-control" placeholder="Data">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-temperature">Temperatura</label>
+                        <input id="admin-weather-temperature" type="text" class="form-control" placeholder="Temperatura">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-rain">Chuva</label>
+                        <input id="admin-weather-rain" type="text" class="form-control" placeholder="Chuva">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-wind">Vento</label>
+                        <input id="admin-weather-wind" type="text" class="form-control" placeholder="Vento">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-location">Localização</label>
+                        <input id="admin-weather-location" type="text" class="form-control" placeholder="Localização">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-weather-notes">Notas</label>
+                        <input id="admin-weather-notes" type="text" class="form-control" placeholder="Notas">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Utilizador -->
+    <div class="modal fade" id="adminUserModal" tabindex="-1" aria-labelledby="adminUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form id="admin-user-form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminUserModalLabel">Atualizar Rota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="admin-user-id" type="hidden">
+                    <div class="form-group mb-3">
+                        <label for="admin-user-name">Nome</label>
+                        <input id="admin-user-name" type="text" class="form-control" placeholder="Nome">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-user-email">Email</label>
+                        <input id="admin-user-email" type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-user-role">Cargo</label>
+                        <input id="admin-user-role" type="text" class="form-control" placeholder="Cargo">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="admin-user-contact">Contacto</label>
+                        <input id="admin-user-contact" type="text" class="form-control" placeholder="Contacto">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>

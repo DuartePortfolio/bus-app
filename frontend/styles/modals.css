@@ -12,6 +12,10 @@
 
 }
 
+.modal-dialog {
+  width: 500px
+}
+
 .modal-content {
   margin: 20px;
   width: auto;

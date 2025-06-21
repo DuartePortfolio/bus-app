@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../styles/base.css">
     
     <link rel="stylesheet" href="../styles/condutorDashboard.css">
+    <link rel="stylesheet" href="../styles/modals.css">
     
 </head>
 <body>
@@ -36,6 +37,10 @@
 
                         <input type="date" name="calendar" id="adminCalendar" class="create-btn">
                     </div>
+
+                    <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterTripsModal">
+                        Filtrar
+                    </button>                    
 
                     <table class="main-table">
                         <thead>
@@ -77,6 +82,92 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="section-row">
+                <div class="section-header">
+                    <h3>Pedidos</h3>
+                    <button id="btn-create-request" class="create-btn">Novo Pedido</button>
+                </div>
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Categoria</th>
+                            <th>Título</th>
+                            <th>Mensagem</th>
+                            <th>Estado</th>
+                            <th>Resposta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="condutor-requests-tbody">
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Modal for creating a request -->
+            <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <form id="request-form" class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="requestModalLabel">Novo Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="request-category" class="form-label">Categoria</label>
+                      <select id="request-category" class="form-select" required>
+                        <option value="">Escolher...</option>
+                        <option value="time_off">Folga</option>
+                        <option value="meeting">Reunião</option>
+                        <option value="feature">Sugestão</option>
+                        <option value="route_change">Alteração de Rota</option>
+                        <option value="other">Outro</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="request-title" class="form-label">Título</label>
+                      <input type="text" id="request-title" class="form-control" maxlength="100" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="request-message" class="form-label">Mensagem</label>
+                      <textarea id="request-message" class="form-control" rows="3" required></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="modal fade" id="filterTripsModal" tabindex="-1" aria-labelledby="filterTripsModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <form id="filter-trips-form" class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="filterTripsModalLabel">Filtrar Viagens</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="filter-trip-route-name" class="form-label">Nome da Rota</label>
+                      <input type="text" id="filter-trip-route-name" class="form-control" placeholder="Ex: Linha Azul">
+                    </div>
+                    <div class="mb-3">
+                      <label for="filter-trip-vehicle-plate" class="form-label">Matrícula do Veículo</label>
+                      <input type="text" id="filter-trip-vehicle-plate" class="form-control" placeholder="Ex: AA-00-BB">
+                    </div>
+                    <div class="mb-3">
+                      <label for="filter-trip-alt-text" class="form-label">Texto do Trajeto Alternativo</label>
+                      <input type="text" id="filter-trip-alt-text" class="form-control" placeholder="Ex: via centro">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                  </div>
+                </form>
+              </div>
+            </div>            
         </div>
     </main>
 
