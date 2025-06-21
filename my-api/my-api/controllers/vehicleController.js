@@ -9,7 +9,7 @@ exports.getAllVehicles = async (req, res) => {
 
     let whereClause = {}
     if (plate_number) {
-      whereClause.plate_number = { [Op.like]: `%${req.query.plate_number}%` };
+      whereClause.plate_number = { [Op.like]: `%${plate_number}%` };
     }
 
     const { capacity } = req.query
