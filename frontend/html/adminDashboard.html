@@ -48,10 +48,14 @@
                         <div class="buttons">
                             <input type="date" name="calendar" id="adminCalendar" class="create-btn">
 
-                            <!-- Adicionar Viagem Modal -->
+
                             <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarViagem">
                                 Adicionar Viagem
                             </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterTripsModal">
+                                Filtrar Viagens
+                            </button>
+                            <!-- Adicionar Viagem Modal -->
                             <div class="modal fade" id="modalAdicionarViagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -90,8 +94,37 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Filtrar Viagens Modal -->
+                            <div class="modal fade" id="filterTripsModal" tabindex="-1" aria-labelledby="filterTripsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-trips-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterTripsModalLabel">Filtrar Viagens</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-trip-route-name" class="form-label">Nome da Rota</label>
+                                    <input type="text" id="filter-trip-route-name" class="form-control" placeholder="Ex: Linha Azul">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-trip-vehicle-plate" class="form-label">Matrícula do Veículo</label>
+                                    <input type="text" id="filter-trip-vehicle-plate" class="form-control" placeholder="Ex: AA-00-BB">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-trip-alt-text" class="form-label">Texto do Trajeto Alternativo</label>
+                                    <input type="text" id="filter-trip-alt-text" class="form-control" placeholder="Ex: via centro">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
+                            </div>                            
                         </div>
                     </div>
+                    <!-- Tabela de Viagens -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -108,42 +141,67 @@
 
                         </tbody>
                     </table>
+                    
                 </div>
 
                 <div class="section-row" id="routes-section">
                     <div class="section-header">
                         <h3>Rotas</h3>
-                    
-                        <!-- Adicionar Rota Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarRota">
-                            Adicionar Rota
-                        </button>
-                        <div class="modal fade" id="modalAdicionarRota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Rota</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="buttons">
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarRota">
+                                Adicionar Rota
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterRoutesModal">
+                                Filtrar Rotas
+                            </button>
+                            <!-- Adicionar Rota Modal -->
+                            <div class="modal fade" id="modalAdicionarRota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Rota</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="rota-form">
+                                                <div class="form-group">
+                                                    <label>Nome</label>
+                                                    <input type="text" placeholder="Nome" name="route_name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Paragens</label>
+                                                    <input type="text" placeholder="Paragens" name="route_name">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="modal-body">
-                                        <form class="rota-form">
-                                            <div class="form-group">
-                                                <label>Nome</label>
-                                                <input type="text" placeholder="Nome" name="route_name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Paragens</label>
-                                                <input type="text" placeholder="Paragens" name="route_name">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
                                 </div>
                             </div>
-                        </div>
+                            <!-- Filtrar Rotas Modal -->
+                            <div class="modal fade" id="filterRoutesModal" tabindex="-1" aria-labelledby="filterRoutesModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <form id="filter-routes-form" class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="filterRoutesModalLabel">Filtrar Rotas</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                        <label for="filter-route-route-name" class="form-label">Nome da Rota</label>
+                                        <input type="text" id="filter-route-route-name" class="form-control" placeholder="Ex: Linha Azul">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                     <table class="main-table">
                         <thead>

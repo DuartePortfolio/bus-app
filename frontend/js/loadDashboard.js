@@ -1,3 +1,13 @@
+const addTripForm = document.querySelector('.viagem-form');
+const addRouteForm = document.querySelector('.rota-form');
+const addStopForm = document.querySelector('.paragem-form');
+const addVehicleForm = document.querySelector('.veiculo-form');
+const addAltTrajectoryForm = document.querySelector('.trajetoria-alternativa-form');
+const addWeatherForm = document.querySelector('.meteorologia-form');
+const addUserForm = document.querySelector('.utilizador-form');
+const filterTripsForm = document.getElementById('filter-trips-form');
+const filterRoutesForm = document.getElementById('filter-routes-form');
+
 async function loadTrips(filters = {}) {
     const tbody = document.getElementById('trips-tbody');
     tbody.innerHTML = '<tr><td colspan="7">A carregar...</td></tr>';
@@ -8,6 +18,11 @@ async function loadTrips(filters = {}) {
         if (filters.vehicle_plate) params.append('vehicle_plate', filters.vehicle_plate);
         if (filters.driver_id) params.append('driver_id', filters.driver_id);
         if (filters.alt_trajectory_id) params.append('alt_trajectory_id', filters.alt_trajectory_id);
+        if (filters.driver_name) params.append('driver_name', filters.driver_name);
+        if (filters.route_name) params.append('route_name', filters.route_name);
+        if (filters.alt_trajectory_text) params.append('alt_trajectory_text', filters.alt_trajectory_text);
+        if (filters.trajectory_id) params.append('trajectory_id', filters.trajectory_id);
+        if (filters.start_time) params.append('start_time', filters.start_time);
         if ([...params].length) url += '?' + params.toString();
 
 
@@ -65,11 +80,16 @@ async function loadTrips(filters = {}) {
     }
 }
 
-async function loadRoutes() {
+async function loadRoutes(filters = {}) {
     const tbody = document.getElementById('routes-tbody');
     tbody.innerHTML = '<tr><td colspan="3">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/routes', {
+        let url = 'http://localhost:3000/api/routes';
+        const params = new URLSearchParams();
+        if (filters.route_name) params.append('route_name', filters.route_name);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -407,8 +427,8 @@ async function loadAdminRequests() {
 }
 
 
-
-    document.getElementById('admin-request-form').addEventListener('submit', async function (e) {
+// event listener for request edit form submission
+document.getElementById('admin-request-form').addEventListener('submit', async function (e) {
         e.preventDefault();
         const id = document.getElementById('admin-request-id').value;
         const status = document.getElementById('admin-request-status').value;
@@ -433,17 +453,10 @@ async function loadAdminRequests() {
         } catch (err) {
             alert('Internal server error');
         }
-    });
-    
-// Add object event listener
-const addTripForm = document.querySelector('.viagem-form');
-const addRouteForm = document.querySelector('.rota-form');
-const addStopForm = document.querySelector('.paragem-form');
-const addVehicleForm = document.querySelector('.veiculo-form');
-const addAltTrajectoryForm = document.querySelector('.trajetoria-alternativa-form');
-const addWeatherForm = document.querySelector('.meteorologia-form');
-const addUserForm = document.querySelector('.utilizador-form');
+});
 
+
+// add trip form even listener
 addTripForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addTripForm);
@@ -476,6 +489,7 @@ addTripForm.addEventListener('submit', async (e) => {
     }
 });
 
+// add route form event listener
 addRouteForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addRouteForm);
@@ -504,6 +518,7 @@ addRouteForm.addEventListener('submit', async (e) => {
     }
 });
 
+// add stop form event listener
 addStopForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addStopForm);
@@ -534,6 +549,7 @@ addStopForm.addEventListener('submit', async (e) => {
     }
 });
 
+// add vehicle form event listener
 addVehicleForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addVehicleForm);
@@ -563,6 +579,7 @@ addVehicleForm.addEventListener('submit', async (e) => {
     }
 });
 
+// add alternative trajectory form event listener
 addAltTrajectoryForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addAltTrajectoryForm);
@@ -593,6 +610,7 @@ addAltTrajectoryForm.addEventListener('submit', async (e) => {
     }
 });
 
+// add weather register form event listener
 addWeatherForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addWeatherForm);
@@ -626,6 +644,7 @@ addWeatherForm.addEventListener('submit', async (e) => {
     }
 });
 
+// add user form event listener
 addUserForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(addUserForm);
@@ -658,8 +677,55 @@ addUserForm.addEventListener('submit', async (e) => {
     }
 });
 
+// filter trips event listener
+if (filterTripsForm) {
+    filterTripsForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            route_name: document.getElementById('filter-trip-route-name').value,
+            vehicle_plate: document.getElementById('filter-trip-vehicle-plate').value,
+            alt_trajectory_text: document.getElementById('filter-trip-alt-text').value
+        };
+        // Remove empty filters
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterTripsModal')).hide();
+        loadTrips(filters);
+    });
+}
+
+// filter routes event listener
+if (filterRoutesForm) {
+    filterRoutesForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            route_name: document.getElementById('filter-route-route-name').value,
+        };
+        // Remove empty filters
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterRoutesModal')).hide();
+        loadRoutes(filters);
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-    loadTrips();
+
+    // set the calendar input to today's date
+    const calendar = document.getElementById('adminCalendar');
+    if (calendar) {
+        const today = new Date().toISOString().split('T')[0];
+        calendar.value = today;
+    }
+    calendar.addEventListener('change', function () {
+        loadTrips({ start_time: this.value });
+    });
+
+
+
+    loadTrips({ start_time: calendar.value});
     loadRoutes();
     loadStops();
     loadVehicles();

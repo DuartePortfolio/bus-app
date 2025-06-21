@@ -8,7 +8,7 @@ const User = db.User
 // GET /api/trips
 exports.getAllTrips = async (req, res) => {
   try {
-    const { driver_id, route_id, vehicle_id, alt_trajectory_id, driver_name, vehicle_plate, route_name, alt_trajectory_text} = req.query;
+    const { driver_id, route_id, vehicle_id, alt_trajectory_id, driver_name, vehicle_plate, route_name, alt_trajectory_text, start_time} = req.query;
 
     const where = {};
     if (driver_id) where.driver_id = driver_id;
@@ -57,9 +57,16 @@ exports.getAllTrips = async (req, res) => {
     }
 
     // Filter by route name
-    if (req.query.route_name) {
-      include[0].where = { route_name: { [Op.like]: `%${req.query.route_name}%` } };
+    if (route_name) {
+      include[0].where = { route_name: { [Op.like]: `%${route_name}%` } };
       include[0].required = true;
+    }
+    
+    if (start_time) {
+      where.start_time = {
+        [Op.gte]: `${start_time} 00:00:00`,
+        [Op.lt]: `${start_time} 23:59:59`
+      };
     }    
 
     const trips = await Trip.findAll({
