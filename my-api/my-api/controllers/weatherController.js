@@ -1,4 +1,5 @@
 const db = require('../models')
+const { Op } = require('sequelize'); // Add this at the top
 const Weather = db.Weather
 
 // GET /api/weather
@@ -28,17 +29,17 @@ exports.getAllReadings = async (req, res) => {
 
     const { location } = req.query
     if (location) {
-      whereClause.location = location
+      whereClause.location = { [Op.like]: `%${location}%` };
     }
 
     const { datetime } = req.query
     if (datetime) {
-      whereClause.datetime = datetime
+      whereClause.datetime = { [Op.like]: `%${datetime}%` };
     }
 
     const { notes } = req.query
     if (notes) {
-      whereClause.notes = notes
+      whereClause.notes = { [Op.like]: `%${notes}%` };
     }
 
     const readings = await Weather.findAll({ where: whereClause })

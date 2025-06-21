@@ -1,8 +1,8 @@
 const db = require('../models');
 const Request = db.Request;
 const User = db.User;
+const { Op } = require('sequelize'); 
 
-// Allowed enums
 const allowedCategories = ['time_off', 'meeting', 'feature', 'route_change', 'other'];
 const allowedStatuses = ['pending', 'accepted', 'denied', 'on_hold'];
 
@@ -46,10 +46,30 @@ exports.getAllRequests = async (req, res) => {
     if (req.user.role === 'driver') {
       where.driver_id = req.user.user_id;
     }
+    // Filtering support
+    if (req.query.category) {
+      where.category = req.query.category;
+    }
+    if (req.query.status) {
+      where.status = req.query.status;
+    }
+    if (req.query.driver) {
+      if (!isNaN(Number(req.query.driver))) {
+        where.driver_id = req.query.driver;
+      }
+    }
+
     const requests = await Request.findAll({
       where,
       include: [
-        { model: User, as: 'driver', attributes: ['user_id', 'name'] },
+        {
+          model: User,
+          as: 'driver',
+          attributes: ['user_id', 'name'],
+          where: req.query.driver && isNaN(Number(req.query.driver))
+            ? { name: { [Op.like]: `%${req.query.driver}%` } }
+            : undefined
+        },
         { model: User, as: 'operator', attributes: ['user_id', 'name'] }
       ],
       order: [['created_at', 'DESC']]

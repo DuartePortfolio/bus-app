@@ -189,8 +189,29 @@
                                     </form>
                                 </div>
                             </div>
+                            <!-- Filtrar Rotas Modal -->
+                            <div class="modal fade" id="filterRoutesModal" tabindex="-1" aria-labelledby="filterRoutesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-routes-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterRoutesModalLabel">Filtrar Rotas</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-route-route-name" class="form-label">Nome da Rota</label>
+                                    <input type="text" id="filter-route-route-name" class="form-control" placeholder="Ex: Courelas - Centro">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
+                            </div>                                
                         </div>                        
                     </div>
+                    <!-- Tabela de Rotas -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -210,41 +231,75 @@
                     <div class="section-header">
                         <h3>Paragens</h3>
 
-                        <!-- Adicionar Paragem Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarParagem">
-                            Adicionar Paragem
-                        </button>
-                        <div class="modal fade" id="modalAdicionarParagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Paragem</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="paragem-form">
-                                            <div class="form-group">
-                                                <label>Nome</label>
-                                                <input type="text" placeholder="Nome da Paragem" name="stop_name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Latitude</label>
-                                                <input type="text" placeholder="32.68700000" name="latitude">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Longitude</label>
-                                                <input type="text" placeholder="-16.94500000" name="longitude">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                        <div class="buttons">
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarParagem">
+                                Adicionar Paragem
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterStopsModal">
+                                Filtrar Paragens
+                            </button>
+                            <!-- Adicionar Paragem Modal -->
+                            <div class="modal fade" id="modalAdicionarParagem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Paragem</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="paragem-form">
+                                                <div class="form-group">
+                                                    <label>Nome</label>
+                                                    <input type="text" placeholder="Nome da Paragem" name="stop_name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Latitude</label>
+                                                    <input type="text" placeholder="32.68700000" name="latitude">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Longitude</label>
+                                                    <input type="text" placeholder="-16.94500000" name="longitude">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <!-- Filtrar Paragens Modal -->
+                            <div class="modal fade" id="filterStopsModal" tabindex="-1" aria-labelledby="filterStopsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-stops-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterStopsModalLabel">Filtrar Paragens</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-stop-name" class="form-label">Nome da Paragem</label>
+                                    <input type="text" id="filter-stop-name" class="form-control" placeholder="Ex: Hotel Casino Park">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-stop-latitude" class="form-label">Latitude</label>
+                                    <input type="text" id="filter-stop-latitude" class="form-control" placeholder="Ex: 32.68700000">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-stop-longitude" class="form-label">Longitude</label>
+                                    <input type="text" id="filter-stop-longitude" class="form-control" placeholder="Ex: -16.94500000">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
+                            </div> 
+                        </div>                       
                     </div>
+                    <!-- Tabela de Paragens -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -265,37 +320,67 @@
                     <div class="section-header">
                         <h3>Veículos</h3>
 
-                        <!-- Adicionar Veículo Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarVeiculo">
-                            Adicionar Veículo
-                        </button>
-                        <div class="modal fade" id="modalAdicionarVeiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Veículo</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="veiculo-form">
-                                            <div class="form-group">
-                                                <label>Matrícula</label>
-                                                <input type="text" placeholder="Matrícula" name="plate_number">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Capacidade</label>
-                                                <input type="text" placeholder="Capacidade" name="capacity">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                        <div class="buttons">
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarVeiculo">
+                                Adicionar Veículo
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterVehiclesModal">
+                                Filtrar Veículos
+                            </button>
+                            <!-- Adicionar Veículo Modal -->
+                            <div class="modal fade" id="modalAdicionarVeiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Veículo</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="veiculo-form">
+                                                <div class="form-group">
+                                                    <label>Matrícula</label>
+                                                    <input type="text" placeholder="Matrícula" name="plate_number">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Capacidade</label>
+                                                    <input type="text" placeholder="Capacidade" name="capacity">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
 
+                                    </div>
                                 </div>
+                            </div>
+                            <!-- Filtrar Veículos Modal -->
+                            <div class="modal fade" id="filterVehiclesModal" tabindex="-1" aria-labelledby="filterVehiclesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-vehicles-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterVehiclesModalLabel">Filtrar Veículos</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-vehicle-plate" class="form-label">Matrícula</label>
+                                    <input type="text" id="filter-vehicle-plate" class="form-control" placeholder="Ex: AA-00-BB">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-vehicle-capacity" class="form-label">Capacidade</label>
+                                    <input type="text" id="filter-vehicle-capacity" class="form-control" placeholder="Ex: 50">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Tabela de Veículos -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -314,42 +399,75 @@
                 <div class="section-row" id="alternative-trajectories-section">
                     <div class="section-header">
                         <h3>Trajetos Alternativos</h3>
-
-                        <!-- Adicionar Trajeto Alternativo Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarTrajeto">
-                            Adicionar Trajeto
-                        </button>
-                        <div class="modal fade" id="modalAdicionarTrajeto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Trajeto</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="buttons">
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarTrajeto">
+                                Adicionar Trajeto
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterAltTrajModal">
+                                Filtrar Trajetos
+                            </button>                        
+                            <!-- Adicionar Trajeto Alternativo Modal -->
+                            <div class="modal fade" id="modalAdicionarTrajeto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Trajeto</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="trajetoria-alternativa-form">
+                                                <div class="form-group">
+                                                    <label>Stop ID 1</label>
+                                                    <input type="text" placeholder="Stop ID 1" name="stop_id_1">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Stop ID 2</label>
+                                                    <input type="text" placeholder="Stop ID 2" name="stop_id_2">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Trajetória</label>
+                                                    <input type="text" placeholder="Descrição da trajetória" name="alt_trajectory">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="modal-body">
-                                        <form class="trajetoria-alternativa-form">
-                                            <div class="form-group">
-                                                <label>Stop ID 1</label>
-                                                <input type="text" placeholder="Stop ID 1" name="stop_id_1">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Stop ID 2</label>
-                                                <input type="text" placeholder="Stop ID 2" name="stop_id_2">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Trajetória</label>
-                                                <input type="text" placeholder="Descrição da trajetória" name="alt_trajectory">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
                                 </div>
+                            </div>
+                            <!-- Filtrar Trajetos Alternativos Modal -->
+                            <div class="modal fade" id="filterAltTrajModal" tabindex="-1" aria-labelledby="filterAltTrajModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-alttraj-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterAltTrajModalLabel">Filtrar Trajetos Alternativos</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-alttraj-stop1" class="form-label">Paragem 1</label>
+                                    <input type="text" id="filter-alttraj-stop1" class="form-control" placeholder="ID ou nome da paragem 1">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-alttraj-stop2" class="form-label">Paragem 2</label>
+                                    <input type="text" id="filter-alttraj-stop2" class="form-control" placeholder="ID ou nome da paragem 2">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-alttraj-desc" class="form-label">Descrição</label>
+                                    <input type="text" id="filter-alttraj-desc" class="form-control" placeholder="Descrição do trajeto">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Tabela de Trajetos Alternativos -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -369,54 +487,104 @@
                 <div class="section-row" id="weather-section">
                     <div class="section-header">
                         <h3>Meteorologia</h3>
-                        
-                        <!-- Adicionar Meterologia Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarMetereologia">
-                            Adicionar Dados Meteorológicos
-                        </button>
-                        <div class="modal fade" id="modalAdicionarMetereologia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Dados Meteorológicos</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="buttons">
+
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarMetereologia">
+                                Adicionar Dados Meteorológicos
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterWeatherModal">
+                                Filtrar Dados 
+                            </button>                           
+                            <!-- Adicionar Meterologia Modal -->
+                            <div class="modal fade" id="modalAdicionarMetereologia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Dados Meteorológicos</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="meteorologia-form">
+                                                <div class="form-group">
+                                                    <label>Data e Hora</label>
+                                                    <input type="text" placeholder="Data" name="datetime">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Temperatura</label>
+                                                    <input type="text" placeholder="Temperatura" name="temperature">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Chuva</label>
+                                                    <input type="text" placeholder="Chuva" name="rain">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Vento</label>
+                                                    <input type="text" placeholder="Vento" name="wind">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Localização</label>
+                                                    <input type="text" placeholder="Localização" name="location">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Notas</label>
+                                                    <input type="text" placeholder="Notas" name="notes">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="modal-body">
-                                        <form class="meteorologia-form">
-                                            <div class="form-group">
-                                                <label>Data e Hora</label>
-                                                <input type="text" placeholder="Data" name="datetime">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Temperatura</label>
-                                                <input type="text" placeholder="Temperatura" name="temperature">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Chuva</label>
-                                                <input type="text" placeholder="Chuva" name="rain">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Vento</label>
-                                                <input type="text" placeholder="Vento" name="wind">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Localização</label>
-                                                <input type="text" placeholder="Localização" name="location">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Notas</label>
-                                                <input type="text" placeholder="Notas" name="notes">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
                                 </div>
+                            </div>
+                            <!-- Filtrar Meteorologia Modal alterar-->
+                            <div class="modal fade" id="filterWeatherModal" tabindex="-1" aria-labelledby="filterWeatherModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-weather-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterWeatherModalLabel">Filtrar Meteorologia</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-weather-date" class="form-label">Data</label>
+                                    <input type="text" id="filter-weather-date" class="form-control" placeholder="Ex: 2025-06-21">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-weather-location" class="form-label">Localização</label>
+                                    <input type="text" id="filter-weather-location" class="form-control" placeholder="Ex: Funchal">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-weather-notes" class="form-label">Notas</label>
+                                    <input type="text" id="filter-weather-notes" class="form-control" placeholder="Notas">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-weather-id" class="form-label">ID</label>
+                                    <input type="text" id="filter-weather-id" class="form-control" placeholder="ID">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-weather-temperature" class="form-label">Temperatura</label>
+                                    <input type="text" id="filter-weather-temperature" class="form-control" placeholder="Temperatura">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-weather-rain" class="form-label">Chuva</label>
+                                    <input type="text" id="filter-weather-rain" class="form-control" placeholder="Chuva">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-weather-wind" class="form-label">Vento</label>
+                                    <input type="text" id="filter-weather-wind" class="form-control" placeholder="Vento">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Tabela de Meteorologia -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -440,50 +608,83 @@
                     <div class="section-header">
                         <h3>Utilizadores</h3>
                         
-                        <!-- Adicionar Utilizador Modal -->
-                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarUtilizador">
-                            Adicionar Utilizador
-                        </button>
-
-                        <div class="modal fade" id="modalAdicionarUtilizador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Adicionar Utilizador</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="buttons">
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarUtilizador">
+                                Adicionar Utilizador
+                            </button>
+                            <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterUsersModal">
+                                Filtrar Utilizadores
+                            </button>   
+                            <!-- Adicionar Utilizador Modal -->
+                            <div class="modal fade" id="modalAdicionarUtilizador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">Adicionar Utilizador</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="utilizador-form">
+                                                <div class="form-group">
+                                                    <label>Nome</label>
+                                                    <input type="text" placeholder="Primeiro e Último Nome" name="name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="text" placeholder="Email" name="email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="text" placeholder="Password" name="password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Cargo</label>
+                                                    <input type="text" placeholder="'operator ou 'driver'" name="role">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Contacto</label>
+                                                    <input type="text" placeholder="Contacto telefónico" name="contact">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="modal-body">
-                                        <form class="utilizador-form">
-                                            <div class="form-group">
-                                                <label>Nome</label>
-                                                <input type="text" placeholder="Primeiro e Último Nome" name="name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="text" placeholder="Email" name="email">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="text" placeholder="Password" name="password">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Cargo</label>
-                                                <input type="text" placeholder="'operator ou 'driver'" name="role">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Contacto</label>
-                                                <input type="text" placeholder="Contacto telefónico" name="contact">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
                                 </div>
+                            </div>
+                            <!-- Filtrar Utilizadores Modal -->
+                            <div class="modal fade" id="filterUsersModal" tabindex="-1" aria-labelledby="filterUsersModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <form id="filter-users-form" class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterUsersModalLabel">Filtrar Utilizadores</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                    <label for="filter-user-name" class="form-label">Nome</label>
+                                    <input type="text" id="filter-user-name" class="form-control" placeholder="Nome">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-user-email" class="form-label">Email</label>
+                                    <input type="text" id="filter-user-email" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="filter-user-role" class="form-label">Cargo</label>
+                                    <input type="text" id="filter-user-role" class="form-control" placeholder="operator ou driver">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Tabela de Utilizadores -->
                     <table class="main-table">
                         <thead>
                             <tr>
@@ -505,6 +706,40 @@
                     <div class="section-header">
                         <h3>Pedidos dos Condutores</h3>
                     </div>
+                    <div class="buttons">
+                        <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterRequestsModal">
+                            Filtrar Pedidos
+                        </button>
+                        <!-- Filtrar Pedidos dos Condutores Modal -->
+                        <div class="modal fade" id="filterRequestsModal" tabindex="-1" aria-labelledby="filterRequestsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form id="filter-requests-form" class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="filterRequestsModalLabel">Filtrar Pedidos dos Condutores</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                <label for="filter-request-driver" class="form-label">Condutor</label>
+                                <input type="text" id="filter-request-driver" class="form-control" placeholder="Nome do condutor">
+                                </div>
+                                <div class="mb-3">
+                                <label for="filter-request-category" class="form-label">Categoria</label>
+                                <input type="text" id="filter-request-category" class="form-control" placeholder="Categoria">
+                                </div>
+                                <div class="mb-3">
+                                <label for="filter-request-status" class="form-label">Estado</label>
+                                <input type="text" id="filter-request-status" class="form-control" placeholder="pending, accepted, denied, on_hold">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                            </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>                                       
+                    <!-- Tabela de Pedidos dos Condutores -->
                     <table class="main-table">
                         <thead>
                             <tr>
