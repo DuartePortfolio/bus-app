@@ -282,33 +282,33 @@ addTripForm.addEventListener('submit', async (e) => {
     }
 });
 
-addRouteForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(addRouteForm);
-    const data = {
-        route_name: formData.get('route_name'),
-    };    
-    try {
-        const res = await fetch('http://localhost:3000/api/routes', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(data)
-        });
-        if (res.ok) {
-            addTripForm.reset();
-            loadRoutes();
-            alert('Route added successfully!');
-        } else {
-            const error = await res.json();
-            alert(`Error: ${error.error || error.message || 'Erro desconhecido.'}`);
-        }
-    } catch (err) {
-        alert('Internal server error');
-    }
-});
+// addRouteForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     const formData = new FormData(addRouteForm);
+//     const data = {
+//         route_name: formData.get('route_name'),
+//     };    
+//     try {
+//         const res = await fetch('http://localhost:3000/api/routes', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${localStorage.getItem('token')}`
+//             },
+//             body: JSON.stringify(data)
+//         });
+//         if (res.ok) {
+//             addTripForm.reset();
+//             loadRoutes();
+//             alert('Route added successfully!');
+//         } else {
+//             const error = await res.json();
+//             alert(`Error: ${error.error || error.message || 'Erro desconhecido.'}`);
+//         }
+//     } catch (err) {
+//         alert('Internal server error');
+//     }
+// });
 
 addStopForm.addEventListener('submit', async (e) => {
     e.preventDefault();

@@ -116,15 +116,25 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="rota-form">
-                                            <div class="form-group">
-                                                <label>Nome</label>
-                                                <input type="text" placeholder="Nome"  name="route_name">
+                                        <div class="main-content">
+                                            <div class="route-creation">
+                                                <input type="text" id="route-name" placeholder="Route name">
+                                                <button id="create-route">Create Route</button>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <div class="route-area">
+                                                <h2 id="route-title">No route created</h2>
+                                                <div id="route-drop-area" class="drop-area">
+                                                    <p>Drag bus stops here to build your route</p>
+                                                </div>
                                             </div>
-                                        </form>
+                                            <div class="bus-stops-drawer">
+                                                <h2>Available Bus Stops</h2>
+                                                <div id="bus-stops-list"></div>
+                                                <!-- <input type="text" id="new-stop-name" placeholder="New bus stop name">
+                                                <button id="add-stop">Add Bus Stop</button> -->
+                                            </div>
+                                            <script src="../js/modelCreateRoute.js"></script>
+                                        </div>
                                     </div>
                                     
                                 </div>
