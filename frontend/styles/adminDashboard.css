@@ -159,3 +159,11 @@ h2, h3 {
   background: #005f8a;
 }
 
+#logo-img {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
