@@ -34,7 +34,7 @@ exports.getAllTrips = async (req, res) => {
       include[2].where = { name: { [Op.like]: `%${driver_name}%` } };
       include[2].required = true;
     }
-
+//
     // Filter by vehicle plate
     if (vehicle_plate) {
       include[1].where = { plate_number: { [Op.like]: `%${vehicle_plate}%` } };

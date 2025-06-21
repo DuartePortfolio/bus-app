@@ -7,6 +7,12 @@ const addWeatherForm = document.querySelector('.meteorologia-form');
 const addUserForm = document.querySelector('.utilizador-form');
 const filterTripsForm = document.getElementById('filter-trips-form');
 const filterRoutesForm = document.getElementById('filter-routes-form');
+const filterStopsForm = document.getElementById('filter-stops-form');
+const filterVehiclesForm = document.getElementById('filter-vehicles-form');
+const filterAltTrajForm = document.getElementById('filter-alttraj-form');
+const filterWeatherForm = document.getElementById('filter-weather-form');
+const filterUsersForm = document.getElementById('filter-users-form');
+const filterRequestsForm = document.getElementById('filter-requests-form');
 
 async function loadTrips(filters = {}) {
     const tbody = document.getElementById('trips-tbody');
@@ -129,11 +135,19 @@ async function loadRoutes(filters = {}) {
     }
 }
 
-async function loadStops() {
+// Update loadStops to accept filters
+async function loadStops(filters = {}) {
     const tbody = document.getElementById('stops-tbody');
     tbody.innerHTML = '<tr><td colspan="5">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/stops', {
+        let url = 'http://localhost:3000/api/stops';
+        const params = new URLSearchParams();
+        if (filters.stop_name) params.append('stop_name', filters.stop_name);
+        if (filters.latitude) params.append('latitude', filters.latitude);
+        if (filters.longitude) params.append('longitude', filters.longitude);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -176,11 +190,17 @@ async function loadStops() {
     }
 }
 
-async function loadVehicles() {
+async function loadVehicles(filters = {}) {
     const tbody = document.getElementById('vehicles-tbody');
     tbody.innerHTML = '<tr><td colspan="4">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/vehicles', {
+        let url = 'http://localhost:3000/api/vehicles';
+        const params = new URLSearchParams();
+        if (filters.plate_number) params.append('plate_number', filters.plate_number);
+        if (filters.capacity) params.append('capacity', filters.capacity);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -200,7 +220,7 @@ async function loadVehicles() {
                         data-capacity="${vehicle.capacity}">
                         Editar
                     </button>
-                    <button class="btn btn-danger btn-sm btn-delete-vehicle actionBtn" data-id="${stop.stop_id}">Apagar</button>
+                    <button class="btn btn-danger btn-sm btn-delete-vehicle actionBtn" data-id="${vehicle.vehicle_id}">Apagar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -220,11 +240,19 @@ async function loadVehicles() {
     }
 }
 
-async function loadAltTrajectories() {
+// Update loadAltTrajectories to accept filters
+async function loadAltTrajectories(filters = {}) {
     const tbody = document.getElementById('alternative-trajectories-tbody');
     tbody.innerHTML = '<tr><td colspan="5">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/alternative_trajectories', {
+        let url = 'http://localhost:3000/api/alternative_trajectories';
+        const params = new URLSearchParams();
+        if (filters.stop_id_1) params.append('stop_id_1', filters.stop_id_1);
+        if (filters.stop_id_2) params.append('stop_id_2', filters.stop_id_2);
+        if (filters.alt_trajectory) params.append('alt_trajectory', filters.alt_trajectory);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -267,11 +295,19 @@ async function loadAltTrajectories() {
     }
 }
 
-async function loadWeather() {
+// Update loadWeather to accept filters
+async function loadWeather(filters = {}) {
     const tbody = document.getElementById('weather-tbody');
     tbody.innerHTML = '<tr><td colspan="8">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/weather', {
+        let url = 'http://localhost:3000/api/weather';
+        const params = new URLSearchParams();
+        if (filters.datetime) params.append('datetime', filters.datetime);
+        if (filters.location) params.append('location', filters.location);
+        if (filters.notes) params.append('notes', filters.notes);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -323,11 +359,18 @@ async function loadWeather() {
     }
 }
 
-async function loadUsers() {
+async function loadUsers(filters = {}) {
     const tbody = document.getElementById('users-tbody');
     tbody.innerHTML = '<tr><td colspan="6">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/users', {
+        let url = 'http://localhost:3000/api/users';
+        const params = new URLSearchParams();
+        if (filters.name) params.append('name', filters.name);
+        if (filters.email) params.append('email', filters.email);
+        if (filters.role) params.append('role', filters.role);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -373,11 +416,19 @@ async function loadUsers() {
     }
 }
 
-async function loadAdminRequests() {
+// Update loadAdminRequests to accept filters
+async function loadAdminRequests(filters = {}) {
     const tbody = document.getElementById('admin-requests-tbody');
     tbody.innerHTML = '<tr><td colspan="8">A carregar...</td></tr>';
     try {
-        const res = await fetch('http://localhost:3000/api/requests', {
+        let url = 'http://localhost:3000/api/requests';
+        const params = new URLSearchParams();
+        if (filters.driver) params.append('driver', filters.driver);
+        if (filters.category) params.append('category', filters.category);
+        if (filters.status) params.append('status', filters.status);
+        if ([...params].length) url += '?' + params.toString();
+
+        const res = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
@@ -708,6 +759,111 @@ if (filterRoutesForm) {
         });
         bootstrap.Modal.getInstance(document.getElementById('filterRoutesModal')).hide();
         loadRoutes(filters);
+    });
+}
+
+// filter stops event listener
+if (filterStopsForm) {
+    filterStopsForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            stop_name: document.getElementById('filter-stop-name').value,
+            latitude: document.getElementById('filter-stop-latitude').value,
+            longitude: document.getElementById('filter-stop-longitude').value
+        };
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterStopsModal')).hide();
+        loadStops(filters);
+    });
+}
+
+// filter vehicles event listener
+if (filterVehiclesForm) {
+    filterVehiclesForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            plate_number: document.getElementById('filter-vehicle-plate').value,
+            capacity: document.getElementById('filter-vehicle-capacity').value
+        };
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterVehiclesModal')).hide();
+        loadVehicles(filters);
+    });
+}
+
+// filter alt trajectories event listener
+if (filterAltTrajForm) {
+    filterAltTrajForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            stop_id_1: document.getElementById('filter-alttraj-stop1').value,
+            stop_id_2: document.getElementById('filter-alttraj-stop2').value,
+            alt_trajectory: document.getElementById('filter-alttraj-desc').value
+        };
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterAltTrajModal')).hide();
+        loadAltTrajectories(filters);
+    });
+}
+
+// filter weather event listener
+if (filterWeatherForm) {
+    filterWeatherForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+          reading_id: document.getElementById('filter-weather-id').value,
+          temperature: document.getElementById('filter-weather-temperature').value,
+          rain: document.getElementById('filter-weather-rain').value,
+          wind: document.getElementById('filter-weather-wind').value,
+          datetime: document.getElementById('filter-weather-date').value,
+          location: document.getElementById('filter-weather-location').value,
+          notes: document.getElementById('filter-weather-notes').value
+        };
+        Object.keys(filters).forEach(key => {
+          if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterWeatherModal')).hide();
+        loadWeather(filters);
+    });
+}
+
+// filter users event listener
+if (filterUsersForm) {
+    filterUsersForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            name: document.getElementById('filter-user-name').value,
+            email: document.getElementById('filter-user-email').value,
+            role: document.getElementById('filter-user-role').value
+        };
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterUsersModal')).hide();
+        loadUsers(filters);
+    });
+}
+
+// filter requests event listener
+if (filterRequestsForm) {
+    filterRequestsForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            driver: document.getElementById('filter-request-driver').value,
+            category: document.getElementById('filter-request-category').value,
+            status: document.getElementById('filter-request-status').value
+        };
+        Object.keys(filters).forEach(key => {
+            if (!filters[key]) delete filters[key];
+        });
+        bootstrap.Modal.getInstance(document.getElementById('filterRequestsModal')).hide();
+        loadAdminRequests(filters);
     });
 }
 

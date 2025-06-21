@@ -1,5 +1,6 @@
 const db = require('../models')
 const Vehicle = db.Vehicle
+const { Op } = require('sequelize')
 
 // GET /api/vehicles
 exports.getAllVehicles = async (req, res) => {
@@ -8,12 +9,12 @@ exports.getAllVehicles = async (req, res) => {
 
     let whereClause = {}
     if (plate_number) {
-      whereClause.plate_number = plate_number
+      whereClause.plate_number = { [Op.like]: `%${req.query.plate_number}%` };
     }
 
     const { capacity } = req.query
     if (capacity) {
-      whereClause.capacity = capacity
+      whereClause.capacity = capacity;
     }
 
     const vehicles = await Vehicle.findAll({ where: whereClause })

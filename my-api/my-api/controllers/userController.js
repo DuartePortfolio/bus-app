@@ -1,17 +1,25 @@
 const db = require('../models')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { Op } = require('sequelize')
 const User = db.User
 
 // GET /api/users
+//
 exports.getAllUsers = async (req, res) => {
   try {
     const { name, email, role, contact } = req.query
 
     let whereClause = {}
-    if (name) whereClause.name = name
-    if (email) whereClause.email = email
-    if (role) whereClause.role = role
+    if (name) {
+      whereClause.name = { [Op.like]: `%${name}%` }
+    }
+    if (email) {
+      whereClause.email = { [Op.like]: `%${email}%` }
+    }
+    if (role) {
+      whereClause.role = role
+    }
     if (contact) whereClause.contact = contact
 
     const users = await User.findAll({ where: whereClause })

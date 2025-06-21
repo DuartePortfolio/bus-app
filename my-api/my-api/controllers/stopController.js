@@ -1,5 +1,6 @@
 const db = require('../models')
 const Stop = db.Stop
+const { Op } = require('sequelize');
 
 // GET /api/stops
 exports.getAllStops = async (req, res) => {
@@ -7,14 +8,14 @@ exports.getAllStops = async (req, res) => {
     const { latitude, longitude, stop_name } = req.query
 
     let whereClause = {}
+    if (stop_name) {
+      whereClause.stop_name = { [Op.like]: `%${stop_name}%` };
+    }
     if (latitude) {
       whereClause.latitude = latitude
     }
     if (longitude) {
       whereClause.longitude = longitude
-    }
-    if (stop_name) {
-      whereClause.stop_name = stop_name
     }
 
     const stops = await Stop.findAll({ where: whereClause })
