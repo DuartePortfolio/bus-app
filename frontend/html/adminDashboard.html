@@ -149,7 +149,7 @@
                         <h3>Rotas</h3>
                         <div class="buttons">
                             <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#modalAdicionarRota">
-                                Adicionar Rota
+                                Gerir Rotas
                             </button>
                             <button type="button" class="create-btn" data-bs-toggle="modal" data-bs-target="#filterRoutesModal">
                                 Filtrar Rotas
@@ -157,7 +157,7 @@
                             <!-- Adicionar Rota Modal -->
                             <div class="modal fade" id="modalAdicionarRota" tabindex="-1" aria-labelledby="modalAdicionarRotaLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <form id="filter-routes-form" class="modal-content">
+                                    <form  class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="modalAdicionarRotaLabel">Adicionar Rota</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -217,7 +217,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
-                                <th>Paragens</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -847,10 +846,6 @@
                     <div class="form-group mb-3">
                         <label for="admin-route-name">Nome</label>
                         <input id="admin-route-name" type="text" class="form-control" placeholder="Nome">
-                    </div>
-                        <div class="form-group mb-3">
-                        <label for="admin-route-stops">Paragens</label>
-                        <input id="admin-route-stops" type="text" class="form-control" placeholder="Paragens">
                     </div>
                 </div>
                 <div class="modal-footer">
