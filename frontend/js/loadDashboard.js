@@ -455,7 +455,7 @@ async function loadUsers(filters = {}) {
             });
         });
         // Delete Users
-        tbody.querySelectorAll('.btn-delete-weather.actionBtn').forEach(btn => {
+        tbody.querySelectorAll('.btn-delete-user.actionBtn').forEach(btn => {
             btn.addEventListener('click', function () {
                 const id = this.getAttribute('data-id');
                 handleDelete(`http://localhost:3000/api/users/${id}`, loadUsers, null);
