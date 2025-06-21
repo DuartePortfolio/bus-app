@@ -97,7 +97,7 @@ async function loadTrips(filters = {}) {
 
 async function loadRoutes(filters = {}) {
     const tbody = document.getElementById('routes-tbody');
-    tbody.innerHTML = '<tr><td colspan="3">A carregar...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4">A carregar...</td></tr>';
     try {
         let url = 'http://localhost:3000/api/routes';
         const params = new URLSearchParams();
@@ -116,13 +116,12 @@ async function loadRoutes(filters = {}) {
             tr.innerHTML = `
                 <td>${route.route_id}</td>
                 <td>${route.route_name}</td>
-                <td>${route.route_stops}</td>
                 <td>
                     <button class="btn btn-primary btn-sm btn-edit-route actionBtn"
                         data-id="${route.route_id}"
                         data-name="${route.route_name}"
                         data-stops="${route.route_stops}">
-                        Editar
+                        Editar Nome
                     </button>
                     <button class="btn btn-danger btn-sm btn-delete-route actionBtn" data-id="${route.route_id}">Apagar</button>
                 </td>
@@ -134,7 +133,6 @@ async function loadRoutes(filters = {}) {
             btn.addEventListener('click', function () {
                 document.getElementById('admin-route-id').value = this.getAttribute('data-id');
                 document.getElementById('admin-route-name').value = this.getAttribute('data-name');
-                document.getElementById('admin-route-stops').value = this.getAttribute('data-stops');
                 const modal = new bootstrap.Modal(document.getElementById('adminRouteModal'));
                 modal.show();
             });
@@ -437,7 +435,7 @@ async function loadUsers(filters = {}) {
                         data-contact="${user.contact}">
                         Editar
                     </button>
-                    <button class="btn btn-danger btn-sm btn-delete-weather actionBtn" data-id="${user.user_id}">Apagar</button>
+                    <button class="btn btn-danger btn-sm btn-delete-user actionBtn" data-id="${user.user_id}">Apagar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -807,7 +805,7 @@ if (filterRoutesForm) {
     filterRoutesForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const filters = {
-            route_name: document.getElementById('filter-route-route-name').value,
+            route_name: document.getElementById('filter-route-route-name').value.trim(),
         };
         // Remove empty filters
         Object.keys(filters).forEach(key => {
