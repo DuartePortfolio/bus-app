@@ -56,8 +56,6 @@ exports.getAllRequests = async (req, res) => {
     if (req.query.driver) {
       if (!isNaN(Number(req.query.driver))) {
         where.driver_id = req.query.driver;
-      } else {
-
       }
     }
 
