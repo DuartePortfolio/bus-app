@@ -957,7 +957,7 @@ async function handleDelete(url, reloadFn, id) {
                 alert('Registo apagado com sucesso!');
             } else {
                 const error = await res.json();
-                alert(error.error || 'Erro ao apagar registo..');
+                alert(error.error || 'Erro ao apagar registo.');
             }
         } catch (err) {
             alert('Internal server error');
