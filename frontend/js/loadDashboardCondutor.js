@@ -27,10 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return
     }
 
-
-
-
-    // Filter modal logic for trips
+    const loginLink = document.getElementById('nav-login-link');
+    const token = localStorage.getItem('token');
+    if (loginLink && token) {
+        loginLink.textContent = 'Perfil';
+        loginLink.href = 'perfil.html';
+    }
 
 
     loadCondutorRequests();

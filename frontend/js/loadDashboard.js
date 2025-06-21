@@ -15,6 +15,13 @@ window.addEventListener('DOMContentLoaded', () => {
         loadTrips({ start_time: this.value });
     });
 
+    const loginLink = document.getElementById('nav-login-link');
+    const token = localStorage.getItem('token');
+    if (loginLink && token) {
+        loginLink.textContent = 'Perfil';
+        loginLink.href = 'perfil.html';
+    }
+
     setupFormHandlers();
     setupFilterHandlers();
     loadTrips();
