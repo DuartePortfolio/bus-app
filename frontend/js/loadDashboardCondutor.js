@@ -141,6 +141,26 @@ async function loadCondutorRequests() {
     }
 }
 
+async function loadUserName() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const userId = payload.user_id;
+        const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+            const user = await res.json();
+            const welcome = document.getElementById('welcome-msg');
+            if (welcome) {
+                welcome.textContent = `Bem-vindo, ${user.name}`;
+            }
+        }
+    } catch (err) {
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const driverId = getUserIdFromToken()
     if (!driverId) {
@@ -208,4 +228,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCondutorRequests();
     loadCondutorTrips({ driver_id: driverId })
     loadCondutorAltTrips(driverId);
+    loadUserName();
 });

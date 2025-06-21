@@ -81,6 +81,15 @@ async function loadTrips(filters = {}) {
                 modal.show();
             });
         });
+
+        // Delete Trips
+        tbody.querySelectorAll('.btn-delete-trip').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/trips/${id}`, loadTrips, null);
+            });
+        });     
+
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="7">Erro ao carregar viagens.</td></tr>';
     }
@@ -130,12 +139,19 @@ async function loadRoutes(filters = {}) {
                 modal.show();
             });
         });
+
+        // Delete Routes
+        tbody.querySelectorAll('.btn-delete-route').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/routes/${id}`, loadRoutes, null);
+            });
+        });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar rotas.</td></tr>';
     }
 }
 
-// Update loadStops to accept filters
 async function loadStops(filters = {}) {
     const tbody = document.getElementById('stops-tbody');
     tbody.innerHTML = '<tr><td colspan="5">A carregar...</td></tr>';
@@ -183,6 +199,13 @@ async function loadStops(filters = {}) {
                 document.getElementById('admin-stop-name').value = this.getAttribute('data-name');
                 const modal = new bootstrap.Modal(document.getElementById('adminStopModal'));
                 modal.show();
+            });
+        });
+        // Delete Stops
+        tbody.querySelectorAll('.btn-delete-stop').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/stops/${id}`, loadStops, null);
             });
         });
     } catch (err) {
@@ -235,12 +258,19 @@ async function loadVehicles(filters = {}) {
                 modal.show();
             });
         });
+        // Delete Vehicles
+        tbody.querySelectorAll('.btn-delete-vehicle').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/vehicles/${id}`, loadVehicles, null);
+            });
+        });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar veículos.</td></tr>';
     }
 }
 
-// Update loadAltTrajectories to accept filters
+
 async function loadAltTrajectories(filters = {}) {
     const tbody = document.getElementById('alternative-trajectories-tbody');
     tbody.innerHTML = '<tr><td colspan="5">A carregar...</td></tr>';
@@ -290,12 +320,18 @@ async function loadAltTrajectories(filters = {}) {
                 modal.show();
             });
         });
+        // Delete Alternative Trajectories
+        tbody.querySelectorAll('.btn-delete-altTraj').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/alternative_trajectories/${id}`, loadAltTrajectories, null);
+            });
+        });
     } catch (err) {
         tbody.innerHTML = '<tr><td colspan="5">Erro ao carregar trajetos alternativos.</td></tr>';
     }
 }
 
-// Update loadWeather to accept filters
 async function loadWeather(filters = {}) {
     const tbody = document.getElementById('weather-tbody');
     tbody.innerHTML = '<tr><td colspan="8">A carregar...</td></tr>';
@@ -352,6 +388,13 @@ async function loadWeather(filters = {}) {
                 document.getElementById('admin-weather-notes').value = this.getAttribute('data-notes');
                 const modal = new bootstrap.Modal(document.getElementById('adminWeatherModal'));
                 modal.show();
+            });
+        });
+        // Delete Weather
+        tbody.querySelectorAll('.btn-delete-weather').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/weather/${id}`, loadWeather, null);
             });
         });
     } catch (err) {
@@ -411,12 +454,18 @@ async function loadUsers(filters = {}) {
                 modal.show();
             });
         });
+        // Delete Users
+        tbody.querySelectorAll('.btn-delete-user.actionBtn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/users/${id}`, loadUsers, null);
+            });
+        });
     } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar veículos.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6">Erro ao carregar utilizadores.</td></tr>';
     }
 }
 
-// Update loadAdminRequests to accept filters
 async function loadAdminRequests(filters = {}) {
     const tbody = document.getElementById('admin-requests-tbody');
     tbody.innerHTML = '<tr><td colspan="8">A carregar...</td></tr>';
@@ -470,6 +519,13 @@ async function loadAdminRequests(filters = {}) {
                 document.getElementById('admin-request-response').value = this.getAttribute('data-response');
                 const modal = new bootstrap.Modal(document.getElementById('adminRequestModal'));
                 modal.show();
+            });
+        });
+        // Delete Requests
+        tbody.querySelectorAll('.btn-delete-request').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                handleDelete(`http://localhost:3000/api/requests/${id}`, loadAdminRequests, null);
             });
         });
     } catch (err) {
@@ -867,6 +923,48 @@ if (filterRequestsForm) {
     });
 }
 
+async function loadUserName() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const userId = payload.user_id;
+        const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+            const user = await res.json();
+            const welcome = document.getElementById('welcome-msg');
+            if (welcome) {
+                welcome.textContent = `Bem-vindo, ${user.name}`;
+            }
+        }
+    } catch (err) {
+    }
+}
+
+async function handleDelete(url, reloadFn) {
+    if (confirm('Tem a certeza que deseja apagar este registo?')) {
+        try {
+            const res = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            if (res.ok) {
+                reloadFn();
+                alert('Registo apagado com sucesso!');
+            } else {
+                const error = await res.json();
+                alert(error.error || 'Erro ao apagar registo.');
+            }
+        } catch (err) {
+            alert('Internal server error');
+        }
+    }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
 
     // set the calendar input to today's date
@@ -879,6 +977,8 @@ window.addEventListener('DOMContentLoaded', () => {
         loadTrips({ start_time: this.value });
     });
 
+    
+
 
 
     loadTrips({ start_time: calendar.value});
@@ -889,4 +989,5 @@ window.addEventListener('DOMContentLoaded', () => {
     loadWeather();
     loadUsers();
     loadAdminRequests();
+    loadUserName();
 });
