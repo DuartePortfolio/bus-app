@@ -166,9 +166,9 @@ export async function loadStops(filters = {}) {
                 <td>
                     <button class="btn btn-primary btn-sm btn-edit-stop actionBtn"
                         data-id="${stop.stop_id}"
-                        data-name="${stop.latitude}"
+                        data-name="${stop.stop_name}"
                         data-stops="${stop.longitude}"
-                        data-latitude="${stop.stop_name}">
+                        data-latitude="${stop.latitude}">
                         Editar
                     </button>
                     <button class="btn btn-danger btn-sm btn-delete-stop actionBtn" data-id="${stop.stop_id}">Apagar</button>

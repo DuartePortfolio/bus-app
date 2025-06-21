@@ -10,8 +10,213 @@ const addUserForm = document.querySelector('.utilizador-form');
 
 
 export function setupFormHandlers() {
-
-
+    // event listener for rotes edit form submission
+    document.getElementById('admin-trip-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-trip-id').value;
+            const time = document.getElementById('admin-trip-time').value;
+            const route_id = document.getElementById('admin-trip-route').value;
+            const vehicle = document.getElementById('admin-trip-vehicle').value;
+            const driver = document.getElementById('admin-trip-driver').value;
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/trips/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ route_id, vehicle, driver, time })
+                });
+                
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminTripModal')).hide();
+                    loadTrips();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating stop');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
+    // event listener for rotes edit form submission
+    document.getElementById('admin-route-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-route-id').value;
+            const route_name = document.getElementById('admin-route-name').value;
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/routes/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ route_name })
+                });
+                
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminRouteModal')).hide();
+                    loadRoutes();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating stop');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
+    // event listener for stops edit form submission
+    document.getElementById('admin-stop-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-stop-id').value;
+            const stop_name = document.getElementById('admin-stop-name').value;
+            
+            const latitude = document.getElementById('admin-stop-latitude').value;
+            const longitude = document.getElementById('admin-stop-longitude').value;
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/stops/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ stop_name, latitude, longitude })
+                });
+                console.log({ stop_name, latitude, longitude });
+                
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminStopModal')).hide();
+                    loadStops();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating stop');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
+    // event listener for vehicle edit form submission
+    document.getElementById('admin-vehicle-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-vehicle-id').value;
+            const plate = document.getElementById('admin-vehicle-plate').value;
+            const capacity = document.getElementById('admin-vehicle-capacity').value;
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/vehicles/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ plate, capacity })
+                });
+                
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminVehicleModal')).hide();
+                    loadVehicles();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating user');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
+// event listener for alternative trajectory edit form submission
+// nao funciona por alguma razao
+    document.getElementById('admin-altTraj-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-altTraj-id').value;
+            const stop1 = document.getElementById('admin-altTraj-stop1').value;
+            const stop2 = document.getElementById('admin-altTraj-stop2').value;
+            const description = document.getElementById('admin-altTraj-name').value;
+            
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/alternative_trajectories/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ stop1, stop2, description })
+                });
+                
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminAltTrajModal')).hide();
+                    loadAltTrajectories();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating user');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
+    // event listener for weather edit form submission
+    document.getElementById('admin-weather-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-weather-id').value;
+            const temperature = document.getElementById('admin-weather-temperature').value;
+            const rain = document.getElementById('admin-weather-rain').value;
+            const wind = document.getElementById('admin-weather-wind').value;
+            const location = document.getElementById('admin-weather-location').value;
+            const notes = document.getElementById('admin-weather-notes').value;
+            const datetime = document.getElementById('admin-weather-datetime').value;
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/weather/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ temperature, rain, wind, location, notes, datetime })
+                });
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminWeatherModal')).hide();
+                    loadWeather();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating user');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
+    // event listener for user edit form submission
+    document.getElementById('admin-user-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-user-id').value;
+            const name = document.getElementById('admin-user-name').value;
+            const email = document.getElementById('admin-user-email').value;
+            const role = document.getElementById('admin-user-role').value;
+            const contact = document.getElementById('admin-user-contact').value;
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`http://localhost:3000/api/users/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ name, email, role, contact })
+                });
+                if (res.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('adminUserModal')).hide();
+                    loadUsers();
+                } else {
+                    const error = await res.json();
+                    alert(error.error || 'Error updating user');
+                }
+            } catch (err) {
+                alert('Internal server error');
+            }
+    });
     // event listener for request edit form submission
     document.getElementById('admin-request-form').addEventListener('submit', async function (e) {
             e.preventDefault();
