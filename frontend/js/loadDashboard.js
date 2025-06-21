@@ -427,7 +427,7 @@ async function loadUsers(filters = {}) {
                 <td>${user.role}</td>
                 <td>${user.contact}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm btn-edit-request"
+                    <button class="btn btn-primary btn-sm btn-edit-request actionBtn"
                         data-id="${user.user_id}"
                         data-name="${user.name}"
                         data-email="${user.email}"
