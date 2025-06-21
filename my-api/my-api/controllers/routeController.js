@@ -2,23 +2,21 @@ const db = require('../models')
 const Route = db.Route
 const Stop = db.Stop
 const RouteStop = db.RouteStop
+const { Op } = require('sequelize');
 
 // GET /api/routes
 exports.getAllRoutes = async (req, res) => {
-  try {
-    const { route_name } = req.query
-
-    let whereClause = {}
-    if (route_name) {
-      whereClause.route_name = route_name
+    try {
+        const where = {};
+        if (req.query.route_name) {
+            where.route_name = { [Op.like]: `%${req.query.route_name}%` };
+        }
+        const routes = await Route.findAll({ where });
+        res.json(routes);
+    } catch (err) {
+        res.status(500).json({ error: 'Error displaying routes.' });
     }
-
-    const routes = await Route.findAll({ where: whereClause })
-    res.json(routes)
-  } catch (err) {
-    res.status(500).json({ error: 'Error displaying routes.' })
-  }
-}
+};
 
 
 
